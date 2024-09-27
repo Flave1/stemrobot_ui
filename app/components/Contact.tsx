@@ -13,7 +13,7 @@ const Contact = () => (
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">Message</label>
-          <textarea className="w-full px-3 py-2 border rounded" id="message" rows="4"></textarea>
+          <textarea className="w-full px-3 py-2 border rounded" id="message" rows={4}></textarea>
         </div>
         <button className="bg-teal-500 w-full px-4 py-2 rounded text-white">Send Message</button>
       </form>
