@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Crypto / robot trade robot",
-  description: "Crypto / robot trade robot",
+  title: "Crypto / Forex trade robot",
+  description: "Crypto / trade trade robot",
 };
 
 export default function RootLayout({
@@ -25,6 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+       <head>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

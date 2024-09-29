@@ -11,7 +11,7 @@ const HeroSection = () => (
     
     {/* Heading and Buttons */}
     <h1 className="text-5xl font-bold mb-4 text-center">Innovating Forex & Crypto Trading with AI</h1>
-    <p className="text-lg mb-8 text-center">Transforms your trading strategy with our cutting-edge automated robots.</p>
+    <p className="text-lg mb-8 text-center">A reliable trading robots for the forex market. Designed to execute trades efficiently and adapt to market conditions, our robots help traders automate their strategies, maximize returns, and reduce risk.</p>
     
     {/* Buttons */}
     <div className="space-x-4">
