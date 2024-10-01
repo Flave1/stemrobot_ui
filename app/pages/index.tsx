@@ -3,6 +3,7 @@ import Features from '../components/Features';
 import Products from '../components/Products';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import Testimonial from '../components/Testimonials';
 
 export default function Index() {
   return (
@@ -12,6 +13,7 @@ export default function Index() {
       <Features />
       <Products />
       <Contact />
+      <Testimonial />
       <Footer />
     </>
   );
