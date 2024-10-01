@@ -1,7 +1,7 @@
 const Testimonial = () => {
     return(
         <>
-            <div>Testimonial</div>
+            <div>Testimonial Update</div>
         </>
     )
 }
