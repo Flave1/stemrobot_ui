@@ -16,7 +16,7 @@ const HeroSection = () => (
     {/* Buttons */}
     <div className="space-x-4">
       <a href="#product" className="bg-teal-500 px-6 py-3 rounded hover:bg-teal-600">Explore Products</a>
-      <a href="#features" className="bg-transparent border border-teal-500 px-6 py-3 rounded hover:bg-teal-600">Learn More</a>
+      <a href="/learnmore" className="bg-transparent border border-teal-500 px-6 py-3 rounded hover:bg-teal-600">Learn More</a>
     </div>
   </section>
 );
