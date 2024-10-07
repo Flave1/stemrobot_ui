@@ -25,3 +25,8 @@ body {
     text-wrap: balance;
   }
 }
+
+
+  .diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% 68%, 0% 100%);
+  }
