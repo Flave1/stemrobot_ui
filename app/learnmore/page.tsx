@@ -10,47 +10,47 @@ const tripleCircle = "assets/three-rings.png"
   
 
   return (
-    <div className="  h-screen">
+    <div className="  h-screen ">
       {/* diagonal/gradian red color background */}
-      <div className=" absolute z-[-10] h-[90%] bg-opacity-80  w-full bg-gradient-to-t from-red-800 diagonal-cut to-red-400 "></div>
+      <div className=" absolute z-[-10] h-[80%] md:h-[70%] lg:h-[50%] xl:h-[40%] 2xl:h-[85%] bg-opacity-80  w-full bg-gradient-to-t from-red-800 diagonal-cut  to-red-400 "></div>
 
-      <div className="h-full  w-full pl-20 pr-20 pt-5 text-white">
+      <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-white">
 
         {/* Navbar section */}
-      <div className=" md:flex ">
-        <div className=" md:flex w-[40%] ">
-            <img src={logo} alt="" className="h-[50px]" />
-            <h1 className="mt-1 font-bold text-5xl">SIRIS.</h1>
-            <img src={logo} alt="" className="h-[30px] mt-4" />
+      <div className=" lg:flex ">
+
+        <div className=" flex  lg:w-[20%] ">
+            <img src={logo} alt="" className="h-[40px] md:h-[50px]" />
+            <h1 className=" font-bold text-4xl md:text-5xl">SIRIS.</h1>
         </div>
 
-        <div className="  w-[60%] text-gray-300">
-        <ul className="  pt-4   text-right flex float-right">
-            <li className="px-4 "><a href="">How it works</a></li>
-            <li className="px-4 "><a href="">Advantage</a></li>
-            <li className="px-4 "><a href="">Free trail mobile SDK</a></li>
-            <li className="px-4 "><a href="">Contact us</a></li>
+        <div className=" bg-slate-400 bg-opacity-20 lg:bg-none text-gray-300 lg:w-[80%]">
+        <ul className=" md:flex md:text-center md:justify-center lg:text-right lg:float-right">
+            <li className="px-4 pt-2 "><a href="">How it works</a></li>
+            <li className="px-4 pt-2 "><a href="">Advantage</a></li>
+            <li className="px-4 pt-2 "><a href="">Contact us</a></li>
+            <li className="px-4 py-2 "><a href="">Free trail mobile SDK</a></li>
           </ul>
         </div>
 
       </div>
 
       {/* Hero section */}
-     <div className="flex  font-mono">
+     <div className="flex font-mono mt-8 md:mt-5 text-center md:text-left md:w-[100%] ">
 
-     <div className=" xl:w-[60%]  text-gray-300 xl:pt-20  ">
-        <h2 className="font-bold text-[40px]">First AI based system for detecting the smartphone screen cracks</h2>
-        <p className="py-5 text-xl">
+     <div className="  text-gray-200 px-2 md:py-10 md:pt-20 md:w-[100%]">
+        <h2 className="font-bold text-2xl lg:text-[40px] ">First AI based system for detecting the smartphone screen cracks</h2>
+        <p className="py-5 md:py-8 lg:text-xl">
           SIRIS (Smartphone image Retrieval identificatin system) uses deep learning model to continously analyze data with a logic structure similar to how a human would draw conclusions
         </p>
         <h3 className="text-xl font-bold pb-2">Best for these indusstry</h3>
-        <ul className="flex">
-          <li className="pr-10 text-xl">Smartphone Device insurance</li>
-          <li className="text-xl">Telecom Supprting for Device tradein programs</li>
+        <ul className="">
+          <li className="pr-10 ">Smartphone Device insurance</li>
+          <li className="">Telecom Supprting for Device tradein programs</li>
         </ul>
 
         {/* Hero Buttons */}
-       <div className="mt-10 flex">
+       <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
        <button className=" flex px-4 mr-4 bg-[#2e2d2d] rounded-lg">
           <div className="mr-4">
           <img src={tripleCircle} alt="" className="h-[35px] mt-1" />
@@ -58,23 +58,23 @@ const tripleCircle = "assets/three-rings.png"
           <div >
             <p className="text-[13px]">Request for</p>
             <div className="flex">
-              <h2 className="pr-[5px] font-bold text-xl">Mobile</h2>
-              <p className="text-xl text-gray-300">SDK</p>
+              <h2 className="pr-[5px] font-bold md:text-xl">Mobile</h2>
+              <p className=" md:text-xl text-gray-300">SDK</p>
             </div>
           </div>
         </button>
 
-        <button className=" flex px-4 bg-[#2e2d2d] rounded-lg">
-          <div className="mr-4 flex">
+        <button className=" flex bg-[#2e2d2d] px-1 rounded-lg">
+          <div className="mr-2 w-[45%] flex">
           <img src={appleIcon} alt="" className="h-[30px] mt-1" />
           <h1 className="font-bold text-3xl mt-1">/</h1>
           <img src={playIcon} alt="" className="h-[35px] mt-1" />
           </div>
-          <div >
+          <div className="" >
             <p className="text-[13px]">Request for</p>
             <div className="flex">
-              <h2 className="pr-[5px] font-bold text-xl">Demo</h2>
-              <p className="text-xl text-gray-300">App</p>
+              <h2 className="pr-[5px] font-bold md:text-xl">Demo</h2>
+              <p className="md:text-xl text-gray-300">App</p>
             </div>
           </div>
         </button>
@@ -82,14 +82,14 @@ const tripleCircle = "assets/three-rings.png"
       </div>
 
       {/* backgroung box */}
-        <div className="w-[25%] h-[160px]  bg-white bg-opacity-10 relative mt-[-80px] z-[-10] ml-[40%]"></div>
-        <div className="w-[80%] bg-opacity-10 h-[150px]  bg-white mt-[-120px] ml-[46%]"></div>
+        <div className="hidden lg:block w-[25%] h-[160px]  bg-[#bba5a5] bg-opacity-10 relative mt-[-80px] z-[-10] ml-[40%]"></div>
+        <div className="hidden lg:block w-[80%] bg-opacity-10 h-[150px]  bg-[#bba5a5] mt-[-120px] ml-[46%]"></div>
      </div>
 
      {/* Phone image */}
-     <div className=" w-[40%] mt-10 h-[600px]">
-     <img src={phoneIcon} alt="" className="h-[100%] " />
-    </div>
+     <div className="hidden  md:block 2xl:w-[600px] ">
+     <img src={phoneIcon} alt="" className="w-full h-full object-cover" />
+     </div>
     </div>
 
     <div className=" p-20">
