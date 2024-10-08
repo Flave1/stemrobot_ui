@@ -12,7 +12,7 @@ const tripleCircle = "assets/three-rings.png"
   return (
     <div className="  h-screen ">
       {/* diagonal/gradian red color background */}
-      <div className=" absolute z-[-10] h-[80%] md:h-[70%] lg:h-[50%] xl:h-[40%] 2xl:h-[85%] bg-opacity-80  w-full bg-gradient-to-t from-red-800 diagonal-cut  to-red-400 "></div>
+      <div className=" absolute z-[-10] h-[80%] md:h-[70%] lg:h-[50%] xl:h-[40%] 2xl:h-[85%] bg-opacity-80  w-full diagonal-cut bg-gradient-to-t from-red-800 to-red-400"></div>
 
       <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-white">
 
