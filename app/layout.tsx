@@ -37,14 +37,7 @@ export default function RootLayout({
           gtag('config', 'G-J11BX1543V');
         `}
       </Script>
-      {/* <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-J11BX1543V');
-      </script> */}
+     
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

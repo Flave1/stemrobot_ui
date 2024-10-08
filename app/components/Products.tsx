@@ -1,10 +1,10 @@
 const Products = () => (
-  <section className="py-20" id="product">
-    <h2 className="text-center text-4xl font-bold mb-10">Stemvisions Trading Robot</h2>
+  <section className="py-20 bg-gray-300" id="product">
+    <h2 className="text-center text-gray-600 text-4xl font-bold mb-10">Stemvisions Trading Robot</h2>
     <div className="grid grid-cols-1 justify-items-center">
       {/* Example Product */}
-      <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
-        <h3 className="text-2xl font-bold mb-2 text-teal-500">Stembot</h3>
+      <div className="bg-slate-200  p-6 rounded-lg shadow-lg text-center max-w-sm">
+        <h3 className="text-2xl font-bold mb-2 text-red-400">Stembot</h3>
         <p className="text-gray-600">Leverages machine learning to enhance forex trading strategies.</p>
         
         {/* Feature List */}
@@ -16,7 +16,7 @@ const Products = () => (
 
         {/* Centered Learn More Button */}
         <div className="mt-6 flex justify-center">
-          <a href="#contact" className="bg-teal-500 px-4 py-2 rounded text-white hover:bg-teal-600">
+          <a href="/learnmore" className="bg-red-400 px-4 py-2 rounded text-white hover:bg-red-500">
             Learn More
           </a>
         </div>
