@@ -13,7 +13,7 @@ const Footer = () => (
             </p>
             <p className="mb-2">
               <span className="font-semibold">Email: </span>
-              <a href="mailto:info@stembots.com" className="text-gray-800 hover:text-teal-100">
+              <a href="mailto:info@forextech.com" className="text-gray-800 hover:text-teal-100">
                 info@stembots.com
               </a>
             </p>
