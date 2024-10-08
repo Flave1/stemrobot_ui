@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 
 
 const LearnMore = () => {
-  const logo = "assets/microchip.png"
   const appleIcon = "assets/apple-logo.png"
   const phoneIcon = "assets/iphone-x-removebg-preview.png"
   const playIcon = "assets/play.png"

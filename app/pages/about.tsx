@@ -1,9 +1,9 @@
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
 
-const About = () => (
-  <>
+// const About = () => (
+//   <>
     
-  </>
-);
+//   </>
+// );
 
-export default About;
+// export default About;
