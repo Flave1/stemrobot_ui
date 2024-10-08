@@ -1,13 +1,13 @@
 const HeroSection = () => (
   <section className="bg-gradient-to-t from-red-800 to-red-400 text-white h-screen flex flex-col justify-center items-center font-mono">
     {/* Logo at the top */}
-    <div className="mb-8">
+    {/* <div className="mb-8">
       <img
-        src="/logo.png"  // Replace with the path to your actual logo
+        src="/logo.png" 
         alt="Company Logo"
         className="md:w-60 h-auto rounded-lg opacity-80 "
       />
-    </div>
+    </div> */}
     
     {/* Heading and Buttons */}
     <h1 className=" text-4xl md:text-5xl font-bold mb-4 text-center">Innovating Forex & Crypto Trading with AI</h1>

@@ -1,6 +1,6 @@
 const Products = () => (
-  <section className="py-20" id="product">
-    <h2 className="text-center text-4xl font-bold mb-10">Stemvisions Trading Robot</h2>
+  <section className="py-20 bg-gray-300" id="product">
+    <h2 className="text-center text-gray-600 text-4xl font-bold mb-10">Stemvisions Trading Robot</h2>
     <div className="grid grid-cols-1 justify-items-center">
       {/* Example Product */}
       <div className="bg-slate-200  p-6 rounded-lg shadow-lg text-center max-w-sm">

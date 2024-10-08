@@ -1,5 +1,5 @@
 const Footer = () => (
-    <footer className="bg-gradient-to-b from-red-800 to-red-400 text-white py-10">
+    <footer className="bg-gradient-to-b from-grey-800 to-grey-400 text-white py-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Contact Information */}
@@ -7,13 +7,13 @@ const Footer = () => (
             <h4 className="text-xl font-bold mb-4">Contact Us</h4>
             <p className="mb-2">
               <span className="font-semibold">Phone: </span>
-              <a href="tel:+1234567890" className="text-gray-800 hover:text-teal-100">
+              <a href="tel:+447881153992" className="text-gray-800 hover:text-teal-100">
                 +44 7881 153992
               </a>
             </p>
             <p className="mb-2">
               <span className="font-semibold">Email: </span>
-              <a href="mailto:info@forextech.com" className="text-gray-800 hover:text-teal-100">
+              <a href="mailto:info@stembots.com" className="text-gray-800 hover:text-teal-100">
                 info@stembots.com
               </a>
             </p>
