@@ -1,0 +1,6 @@
+{
+    "watch": ["app/pages/api", "server"],
+    "ext": "js,json,ts,tsx",
+    "ignore": ["node_modules"],
+    "exec": "next dev"
+}
