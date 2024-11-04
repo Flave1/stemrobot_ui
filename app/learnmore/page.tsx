@@ -17,7 +17,7 @@ const LearnMore = () => {
       <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-white">
 
         {/* Navbar section */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         {/* Hero section */}
         <div className="flex font-mono mt-8 md:mt-5 text-center md:text-left md:w-[100%] ">
