@@ -15,7 +15,7 @@ const HeroSection = () => (
     
     {/* Buttons */}
     <div className="space-x-4">
-      <a href="#product" className="bg-gray-800 px-6 py-3 rounded hover:bg-black">Explore Products</a>
+      {/* <a href="#product" className="bg-gray-800 px-6 py-3 rounded hover:bg-black">Explore Products</a> */}
       <a href="/learnmore" className="bg-transparent border border-gray-800 px-6 py-3 rounded hover:bg-black">Learn More</a>
     </div>
   </section>
