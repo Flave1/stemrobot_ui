@@ -5,10 +5,10 @@ import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
 
 const LearnMore = () => {
-  const appleIcon = "assets/apple-logo.png";
+  // const appleIcon = "assets/apple-logo.png";
   const phoneIcon = "assets/iphone-x-removebg-preview.png";
-  const playIcon = "assets/play.png";
-  const tripleCircle = "assets/three-rings.png";
+  // const playIcon = "assets/play.png";
+  // const tripleCircle = "assets/three-rings.png";
 
   return (
     <>
