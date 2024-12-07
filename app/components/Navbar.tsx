@@ -29,7 +29,7 @@
 import Link from 'next/link';
 
 const Navbar = () => (
-  <nav className="bg-white bg-opacity-50 backdrop-blur-md text-white py-4 lg:px-10 shadow-md">
+  <nav className="bg-gray-100 bg-opacity-50 backdrop-blur-md text-white py-4 lg:px-10 shadow-md">
 
     <div className="lg:flex ">
 
@@ -40,7 +40,7 @@ const Navbar = () => (
       </div>
 
       <div className="bg-opacity-15 pr-20 lg:bg-none text-gray-900 lg:w-[80%] mt-2">
-        <ul className="md:flex md:text-center md:justify-center lg:text-right lg:float-right">
+        <ul className="md:flex md:text-center md:justify-center lg:text-right lg:float-right font-mont">
           <li className="px-4 pt-2">
             <Link href="/products" className="hover:text-gray-200 font-bold">
               Product

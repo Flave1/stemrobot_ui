@@ -162,21 +162,21 @@ const LearnMore = () => {
           <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-gray-800">
             <div className="flex font-mono mt-8 md:mt-5 text-center md:w-[100%]">
               <div className="text-gray-800 px-2 md:py-10 md:pt-20 font-mont">
-                <h2 className="text-2xl font-bold lg:text-6xl">
+                <h2 className="text-2xl px-5 font-bold lg:text-6xl">
                   Stembots AI Trader: Mastering the Markets with Intelligent Precision
                 </h2>
-                <p className="py-5 md:py-8 lg:text-xl">
+                <p className="py-5 px-10 lg:px-40 md:py-8 lg:text-2xl">
                   Stembots AI Trader merges cutting-edge artificial intelligence with advanced
                   human-like strategies, analyzing and adapting to market conditions in real-time to
                   make high-precision trades. It manages risk, monitors capital, and ensures optimal
                   trading performance for every market condition.
                 </p>
-                <h3 className="text-xl font-bold pb-2">Best for these industries</h3>
-                <ul>
+                {/* <h3 className="text-xl font-bold pb-2">Best for these industries</h3> */}
+                {/* <ul>
                   <li className="">Advanced Risk Management Solutions</li>
                   <li>Customizable Trading Strategies</li>
                   <li>Real-time Market Trend Analysis</li>
-                </ul>
+                </ul> */}
 
                 <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
                   <button className="flex bg-[#2e2d2d] px-1 rounded-lg">

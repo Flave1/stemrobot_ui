@@ -8,18 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-       keyframes: {
+      keyframes: {
         moveGradient: {
-          '0%': { backgroundPosition: '200% 0%' },
-          '50%': { backgroundPosition: '50% 0%' },
-          '100%': { backgroundPosition: '200% 0%' },
+          "0%": { backgroundPosition: "200% 0%" },
+          "50%": { backgroundPosition: "50% 0%" },
+          "100%": { backgroundPosition: "200% 0%" },
         },
       },
       animation: {
-        'moving-gradient': 'moveGradient 10s ease infinite',
+        "moving-gradient": "moveGradient 10s ease infinite",
       },
       fontFamily: {
-        mont: ["Space Grotesk", "sans-serif"],
+        // mont: ["Space Grotesk", "sans-serif"],
+        mont: ["Old Standard TT", "sans-serif"],
       },
       colors: {
         background: "var(--background)",
