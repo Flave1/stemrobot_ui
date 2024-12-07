@@ -4,7 +4,7 @@ const HeroSection = () => (
     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">
       Innovating Forex & Crypto Trading with AI
     </h1>
-    <p className="text-xl mb-8 text-center px-10 lg:text-2xl">
+    <p className="text-xl mb-8 text-center px-10 lg:text-3xl">
       A reliable trading robot for the forex market. Designed to execute trades efficiently and
       adapt to market conditions, our robots help traders automate their strategies, maximize
       returns, and reduce risk.
@@ -13,7 +13,7 @@ const HeroSection = () => (
     <div className="space-x-4">
       <a
         href="/learnmore"
-        className="relative px-8 py-5 rounded group overflow-hidden border border-gray-800 bg-transparent transition-all duration-300"
+        className="relative px-8 py-5 rounded group overflow-hidden border-none border-gray-800 bg-transparent transition-all duration-300"
       >
         <span
           className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900
