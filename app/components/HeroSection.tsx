@@ -13,9 +13,19 @@ const HeroSection = () => (
     <div className="space-x-4">
       <a
         href="/learnmore"
-        className="bg-transparent border border-gray-800 px-6 py-3 rounded hover:bg-black"
+        className="relative px-8 py-5 rounded group overflow-hidden border border-gray-800 bg-transparent transition-all duration-300"
       >
-        Learn More
+        <span
+          className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900
+                 transition-transform duration-300 transform scale-x-0 group-hover:scale-x-100"
+        ></span>
+        <span
+          className="absolute inset-0 bg-black bg-opacity-80 transition-opacity duration-300
+                 group-hover:bg-opacity-0"
+        ></span>
+        <span className="relative font-bold uppercase text-gray-200 group-hover:text-white transition-colors duration-300">
+          Learn More
+        </span>
       </a>
     </div>
   </section>
