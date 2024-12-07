@@ -1,6 +1,5 @@
 const HeroSection = () => (
   <section className="font-mont text-white h-screen flex flex-col justify-center items-center hero-bg">
-    {/* Heading and Buttons */}
     <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">
       Innovating Forex & Crypto Trading with AI
     </h1>
