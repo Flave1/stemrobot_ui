@@ -145,10 +145,6 @@
   // const tripleCircle = "assets/three-rings.png";
 
 
-
-
-
-
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
@@ -160,12 +156,12 @@ const LearnMore = () => {
       <Navbar />
       <CopilotKit runtimeUrl="/api/copilotkit">
         <div className="relative h-screen">
-          {/* Fading color-changing background */}
-          <div className="absolute z-[-10] h-full w-full animated-fade-bg"></div>
+          {/* Fading and moving gradient background */}
+          <div className="absolute z-[-10] inset-0 animated-moving-gradient"></div>
 
-          <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-white">
+          <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-gray-800">
             <div className="flex font-mono mt-8 md:mt-5 text-center md:w-[100%]">
-              <div className="text-white px-2 md:py-10 md:pt-20  font-mont">
+              <div className="text-gray-800 px-2 md:py-10 md:pt-20 font-mont">
                 <h2 className="text-2xl font-bold lg:text-6xl">
                   Stembots AI Trader: Mastering the Markets with Intelligent Precision
                 </h2>
@@ -177,7 +173,7 @@ const LearnMore = () => {
                 </p>
                 <h3 className="text-xl font-bold pb-2">Best for these industries</h3>
                 <ul>
-                  <li className="pr-10">Advanced Risk Management Solutions</li>
+                  <li className="">Advanced Risk Management Solutions</li>
                   <li>Customizable Trading Strategies</li>
                   <li>Real-time Market Trend Analysis</li>
                 </ul>
@@ -213,9 +209,9 @@ const LearnMore = () => {
           </div>
         </div>
         <CopilotPopup
-          instructions={
-            "You are assisting the user as best as you can. Answer in the best way possible given the data you have."
-          }
+          instructions={`
+            You are assisting the user as best as you can. Answer in the best way possible given the data you have.
+          `}
           labels={{
             title: "Forex Market robot",
             initial: "What do you want me to do?",
