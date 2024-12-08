@@ -33,9 +33,10 @@
 }
 
 .animated-moving-gradient {
-  @apply bg-gradient-to-l from-purple-400 via-white to-purple-300 animate-moving-gradient;
+  @apply bg-gradient-to-l from-[#40E0D0] via-[#007BA7] to-[#4B0082] animate-moving-gradient;
   background-size: 200% 100%;
 }
+
 
 
 @keyframes gradientGlow {
