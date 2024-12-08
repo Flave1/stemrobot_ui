@@ -33,7 +33,7 @@
 }
 
 .animated-moving-gradient {
-  @apply bg-gradient-to-l from-[#40E0D0] via-[#007BA7] to-[#4B0082] animate-moving-gradient;
+  @apply bg-gradient-to-l from-[#4B0082] via-[#007BA7] to-[#4B0082] animate-moving-gradient;
   background-size: 200% 100%;
 }
 
