@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const HeroSection = () => (
   <section className="font-mont text-white h-screen flex flex-col justify-center items-center hero-bg">
     <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">
@@ -10,7 +12,7 @@ const HeroSection = () => (
     </p>
     {/* Buttons */}
     <div className="space-x-4">
-      <a
+      <Link
         href="/learnmore"
         className="relative px-8 py-5 rouded-md group overflow-hidden border-none border-gray-800 bg-transparent transition-all duration-300"
       >
@@ -25,7 +27,7 @@ const HeroSection = () => (
         <span className="relative font-bold uppercase text-gray-200 group-hover:text-white transition-colors duration-300">
           Learn More
         </span>
-      </a>
+      </Link>
     </div>
   </section>
 );

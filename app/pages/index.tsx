@@ -2,10 +2,12 @@ import { CopilotKit } from "@copilotkit/react-core";
 import HeroSection from "../components/HeroSection";
 import "@copilotkit/react-ui/styles.css";
 import { CopilotPopup } from "@copilotkit/react-ui";
+// import Navbar from "../components/Navbar";
 export default function Index() {
   return (
     <>
       <CopilotKit runtimeUrl="/api/copilotkit">
+        {/* <Navbar /> */}
         <HeroSection />
         <CopilotPopup
           instructions={
