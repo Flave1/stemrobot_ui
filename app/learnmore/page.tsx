@@ -149,8 +149,8 @@ import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
 import Navbar from "../components/Navbar";
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import Link from "next/link";
+// import { MdOutlineArrowBackIosNew } from "react-icons/md";
+// import Link from "next/link";
 
 
 const LearnMore = () => {
