@@ -20,7 +20,7 @@ const config: Config = {
       },
       fontFamily: {
         // mont: ["Space Grotesk", "sans-serif"],
-        mont: ["Old Standard TT", "sans-serif"],
+        mont: ["Source Code Pro", "sans-serif"],
       },
       colors: {
         background: "var(--background)",

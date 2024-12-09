@@ -163,9 +163,9 @@ const LearnMore = () => {
           <div className="absolute z-[-10] inset-0 animated-moving-gradient"></div>
 
           <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-gray-800">
-            <div className="flex font-mono mt-40 md:mt-40 text-center md:w-[100%]">
+            <div className="flex font-mono mt-20 md:mt-20 text-center md:w-[100%]">
               <div className="text-white px-2 md:py-10 md:pt-20 font-mont mb-20">
-                <h2 className="text-2xl px-4 font-bold lg:text-6xl">
+                <h2 className="text-2xl px-4 font-semibold lg:text-5xl">
                   Stembots AI Trader: Mastering the Markets with Intelligent Precision
                 </h2>
                 <p className="py-5 px-5 lg:px-40 md:py-8 lg:text-2xl">
