@@ -149,6 +149,9 @@ import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
 import Navbar from "../components/Navbar";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import Link from "next/link";
+
 
 const LearnMore = () => {
   return (
@@ -161,7 +164,7 @@ const LearnMore = () => {
 
           <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-gray-800">
             <div className="flex font-mono mt-8 md:mt-5 text-center md:w-[100%]">
-              <div className="text-white px-2 md:py-10 md:pt-20 font-mont">
+              <div className="text-white px-2 md:py-10 md:pt-20 font-mont mb-20">
                 <h2 className="text-2xl px-5 font-bold lg:text-6xl">
                   Stembots AI Trader: Mastering the Markets with Intelligent Precision
                 </h2>
@@ -178,27 +181,26 @@ const LearnMore = () => {
                   <li>Real-time Market Trend Analysis</li>
                 </ul> */}
 
-                <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
-                  <button className="flex bg-[#2e2d2d] px-1 rounded-lg">
-                    <div className="mr-2 w-[45%] flex">
-                      <a href="/" className="font-bold text-1xl mt-1">
-                        {" "}
-                        {" <=Back"}
-                      </a>
-                    </div>
+                {/* <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
+                  <button className=" px-4 rounded-lg">
+                    <Link href="/" className="font-bold text-1xl mt-1">
+                      <div className="mr-2 w-[45%] flex fixed">
+                        <MdOutlineArrowBackIosNew className="size-10 bg-blue-500 rounded-full" />
+                      </div>
+                    </Link>
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
 
-            <div className="p-20">
+            <div className="mt-20 font-mont">
               <div className="text-center mx-auto">
                 <div className="flex text-center mx-auto justify-center">
                   <h1 className="text-red-500 font-thin text-2xl">How</h1>
                   <h1 className="px-4 font-thin text-2xl">STEMBOTS</h1>
                   <h1 className="text-red-500 font-thin text-2xl">Works</h1>
                 </div>
-                <p className="text-white">
+                <p className="text-gray-900">
                   With proprietary AI algorithms, Stembots continuously learns from market data,
                   predicting trends and automating trades. It is built for adaptability, efficiently
                   executing trades, managing risks, and making calculated decisions under any market
