@@ -22,7 +22,7 @@ const Navbar = () => {
         <div className="lg:w-[80%] mt-2 relative">
           {/* Mobile toggle button */}
           <div className="md:hidden flex justify-between items-center">
-            <button onClick={toggleNavbar} className="text-gray-900 font-bold">
+            <button onClick={toggleNavbar} className="text-white font-bold">
               {isOpen ? "X" : "☰"}
             </button>
           </div>
@@ -30,7 +30,7 @@ const Navbar = () => {
           {/* Navbar links */}
           <ul
             className={`md:flex md:text-center md:justify-center lg:text-right lg:float-right font-mont ${
-              isOpen ? "absolute top-full right-1 mt-10 text-white bg-gray-900 bg-opacity-50" : "hidden"
+              isOpen ? "absolute top-full rounded-lg right-1 mt-10 text-white bg-gray-800 " : "hidden"
             } lg:flex lg:justify-end`}
           >
             <li className="px-4 py-2">

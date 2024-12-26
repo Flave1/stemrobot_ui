@@ -164,7 +164,7 @@ const LearnMore = () => {
 
           <div className="h-full w-full md:px-5 xl:px-20 pt-5 text-gray-800">
             <div className="flex font-mono mt-20 md:mt-20 text-center md:w-[100%]">
-              <div className="text-white px-2 md:py-10 md:pt-20 font-mont mb-20">
+              <div className="pt-40 text-white px-2 md:py-10 md:pt-40 lg:pt-20 font-mont mb-20">
                 <h2 className="text-2xl px-4 font-semibold lg:text-5xl">
                   Stembots AI Trader: Mastering the Markets with Intelligent Precision
                 </h2>
