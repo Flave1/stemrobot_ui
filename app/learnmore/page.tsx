@@ -158,7 +158,7 @@ const LearnMore = () => {
     <>
       <Navbar />
       <CopilotKit runtimeUrl="/api/copilotkit">
-        <div className="relative h-screen">
+        <div className="relative min-h-screen">
           {/* Fading and moving gradient background */}
           <div className="absolute z-[-10] inset-0 animated-moving-gradient"></div>
 
@@ -173,38 +173,6 @@ const LearnMore = () => {
                   human-like strategies, analyzing and adapting to market conditions in real-time to
                   make high-precision trades. It manages risk, monitors capital, and ensures optimal
                   trading performance for every market condition.
-                </p>
-                {/* <h3 className="text-xl font-bold pb-2">Best for these industries</h3> */}
-                {/* <ul>
-                  <li className="">Advanced Risk Management Solutions</li>
-                  <li>Customizable Trading Strategies</li>
-                  <li>Real-time Market Trend Analysis</li>
-                </ul> */}
-
-                {/* <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
-                  <button className=" px-4 rounded-lg">
-                    <Link href="/" className="font-bold text-1xl mt-1">
-                      <div className="mr-2 w-[45%] flex fixed">
-                        <MdOutlineArrowBackIosNew className="size-10 bg-blue-500 rounded-full" />
-                      </div>
-                    </Link>
-                  </button>
-                </div> */}
-              </div>
-            </div>
-
-            <div className="mt-20 font-mont">
-              <div className="text-center mx-auto">
-                <div className="flex text-center mx-auto justify-center">
-                  <h1 className="text-red-500 text-2xl font-bold">How</h1>
-                  <h1 className="px-4 font-bold text-2xl">STEMBOTS</h1>
-                  <h1 className="text-red-500 font-bold text-2xl">Works</h1>
-                </div>
-                <p className="text-white lg:text-gray-900 ">
-                  With proprietary AI algorithms, Stembots continuously learns from market data,
-                  predicting trends and automating trades. It is built for adaptability, efficiently
-                  executing trades, managing risks, and making calculated decisions under any market
-                  condition.
                 </p>
               </div>
             </div>
@@ -225,3 +193,45 @@ const LearnMore = () => {
 };
 
 export default LearnMore;
+
+
+  {
+    /* <h3 className="text-xl font-bold pb-2">Best for these industries</h3> */
+  }
+  {
+    /* <ul>
+                  <li className="">Advanced Risk Management Solutions</li>
+                  <li>Customizable Trading Strategies</li>
+                  <li>Real-time Market Trend Analysis</li>
+                </ul> */
+  }
+
+  {
+    /* <div className="mt-10 md:mt-10 flex justify-center mx-auto md:justify-normal">
+                  <button className=" px-4 rounded-lg">
+                    <Link href="/" className="font-bold text-1xl mt-1">
+                      <div className="mr-2 w-[45%] flex fixed">
+                        <MdOutlineArrowBackIosNew className="size-10 bg-blue-500 rounded-full" />
+                      </div>
+                    </Link>
+                  </button>
+                </div> */
+}
+  
+ {
+   /* <div className="mt-20 font-mont">
+              <div className="text-center mx-auto">
+                <div className="flex text-center mx-auto justify-center">
+                  <h1 className="text-red-500 text-2xl font-bold">How</h1>
+                  <h1 className="px-4 font-bold text-2xl">STEMBOTS</h1>
+                  <h1 className="text-red-500 font-bold text-2xl">Works</h1>
+                </div>
+                <p className="text-white lg:text-gray-900 ">
+                  With proprietary AI algorithms, Stembots continuously learns from market data,
+                  predicting trends and automating trades. It is built for adaptability, efficiently
+                  executing trades, managing risks, and making calculated decisions under any market
+                  condition.
+                </p>
+              </div>
+            </div> */
+ }

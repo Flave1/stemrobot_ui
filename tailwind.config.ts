@@ -19,7 +19,6 @@ const config: Config = {
         "moving-gradient": "moveGradient 10s ease infinite",
       },
       fontFamily: {
-        // mont: ["Space Grotesk", "sans-serif"],
         mont: ["Source Code Pro", "sans-serif"],
       },
       colors: {
@@ -28,7 +27,7 @@ const config: Config = {
       },
 
       screens: {
-        xxl: "1600px", //  my screen size
+        xxl: "1600px",
         sm: "640px",
         md: "768px",
         lg: "1024px",
