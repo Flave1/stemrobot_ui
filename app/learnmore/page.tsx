@@ -12,7 +12,7 @@ const LearnMore = () => {
 
   return (
     <>
-      <CopilotKit runtimeUrl="/api/copilotkit">
+      <CopilotKit runtimeUrl="/api/copilotkit" agent="search_agent">
         <div className="  h-screen ">
           {/* diagonal/gradian red color background */}
           <div className=" absolute z-[-10] h-[80%] md:h-[70%] lg:h-[50%] xl:h-[40%] 2xl:h-[85%] bg-opacity-80  w-full diagonal-cut bg-gradient-to-t from-red-800 to-red-400"></div>

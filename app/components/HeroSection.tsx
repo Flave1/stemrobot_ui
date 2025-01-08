@@ -1,13 +1,13 @@
 const HeroSection = () => (
   <section className="bg-gradient-to-t from-red-800 to-red-400 text-white h-screen flex flex-col justify-center items-center font-mono">
     {/* Logo at the top */}
-    {/* <div className="mb-8">
+    <div className="mb-8">
       <img
         src="/logo.png" 
         alt="Company Logo"
         className="md:w-60 h-auto rounded-lg opacity-80 "
       />
-    </div> */}
+    </div>
     
     {/* Heading and Buttons */}
     <h1 className=" text-4xl md:text-5xl font-bold mb-4 text-center">Innovating Forex & Crypto Trading with AI</h1>
@@ -15,7 +15,7 @@ const HeroSection = () => (
     
     {/* Buttons */}
     <div className="space-x-4">
-      {/* <a href="#product" className="bg-gray-800 px-6 py-3 rounded hover:bg-black">Explore Products</a> */}
+      <a href="/chat" className="bg-gray-800 px-6 py-3 rounded hover:bg-black">See how it works</a>
       <a href="/learnmore" className="bg-transparent border border-gray-800 px-6 py-3 rounded hover:bg-black">Learn More</a>
     </div>
   </section>
