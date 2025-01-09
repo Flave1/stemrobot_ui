@@ -14,6 +14,7 @@ import { createStreamableUI, createStreamableValue } from "ai/rsc";
 import { StreamEvent } from "@langchain/core/tracers/log_stream";
 import { AIMessage } from "@/ai/message";
 import { HumanMessageText } from "./message";
+import { FaLocationArrow } from "react-icons/fa";
 
 export interface ChatProps {}
 
@@ -149,11 +150,11 @@ export default function Chat() {
         <Button
           type="submit"
           disabled={!input.trim()}
-          className={`py-4 px-6 text-white duration-700 ${
+          className={`p-4 text-white duration-700 text-xl rounded-full ${
             input.trim() ? "bg-blue-500 hover:bg-blue-700 duration-500" : "bg-gray-400"
           }`}
         >
-          Submit
+          <FaLocationArrow />
         </Button>
       </form>
     </div>
