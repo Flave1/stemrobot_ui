@@ -114,7 +114,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="w-[70vw] overflow-y-scroll h-[80vh] flex flex-col gap-4 mx-auto border-[1px] border-gray-200 rounded-lg p-3 shadow-sm bg-gray-50/25">
+    <div className="w-[70vw] overflow-y-scroll h-[80vh] flex flex-col gap-4 mx-auto border-[1px] bg-gray-900 border-gray-200 rounded-lg p-3 shadow-sm bg-gray-50/25">
       <LocalContext.Provider value={onSubmit}>
         <div className="flex flex-col w-full gap-1 mt-auto">{elements}</div>
       </LocalContext.Provider>
@@ -140,12 +140,21 @@ export default function Chat() {
           />
         </div>
         <Input
-          placeholder="What's the weather like in San Francisco?"
+          placeholder="What's the weather like in San Francisco?...."
           value={input}
+          className="bg-gray-400 text-gray-900 placeholder:text-gray-700 rounded-full"
           onChange={(e) => setInput(e.target.value)}
         />
-        
-        <Button type="submit">Submit</Button>
+
+        <Button
+          type="submit"
+          disabled={!input.trim()}
+          className={`py-4 px-6 text-white duration-700 ${
+            input.trim() ? "bg-blue-500 hover:bg-blue-700 duration-500" : "bg-gray-400"
+          }`}
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );

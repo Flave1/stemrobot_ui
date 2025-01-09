@@ -16,8 +16,8 @@ export function AIMessageText(props: MessageTextProps) {
 
 export function HumanMessageText(props: MessageTextProps) {
   return (
-    <div className="flex ml-auto w-fit max-w-[700px] bg-gray-200 rounded-md px-2 py-1">
-      <p className="text-normal text-gray-800 text-left break-words">
+    <div className="flex ml-auto w-fit max-w-[700px] bg-gray-800 rounded-lg p-3">
+      <p className="text-normal text-white text-left break-words">
         {props.content}
       </p>
     </div>
