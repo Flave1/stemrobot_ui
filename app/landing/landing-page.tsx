@@ -213,7 +213,7 @@ export default function LandinPage() {
           Trade stocks, crypto, and forex with intelligent insights
         </h2>
         <Link
-          href="/signup"
+          href="/chat"
           className="bg-blue-500 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-600 transition duration-300"
         >
           Start Trading

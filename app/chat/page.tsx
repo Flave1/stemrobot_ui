@@ -1,14 +1,15 @@
-import Chat from "@/components/prebuilt/chat";
+"use client";
 
-export default function Home() {
+// import Chat from "@/components/prebuilt/chat";
+import ChatForm from "./chat-form";
+
+const Chat = () => {
   return (
-    <main className="flex h-screen flex-col items-center justify-between px-24 bg-white">
-      <div className="w-full min-w-[600px] flex flex-col gap-4">
-        <p className="text-[28px] text-center font-medium text-black">
-          Stembot Robot Trader
-        </p>
-        <Chat />
-      </div>
-    </main>
+    //bg-background
+    <div className="min-h-screen text-foreground">
+      <ChatForm />
+    </div>
   );
-}
+};
+
+export default Chat;

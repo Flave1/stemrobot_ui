@@ -2,6 +2,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef } from "react";
+import Link from "next/link";
 
 const Header = () => {
     function SpinningLogo() {
@@ -45,14 +46,14 @@ const Header = () => {
           </div>
           <ul className="flex space-x-6">
             <li>
-              <a href="#" className="hover:text-gray-300">
+              <a href="/" className="hover:text-gray-300">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-300">
-                Features
-              </a>
+              <Link href="/signup" className="hover:text-gray-300">
+                Try it out
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:text-gray-300">
