@@ -88,12 +88,31 @@ async function agent(inputs: {
       event.data.output.tool_calls.length > 0
     ) {
       const toolCall = event.data.output.tool_calls[0];
+
+      if (!(toolCall.type in TOOL_COMPONENT_MAP)) {
+        console.error(
+          `Invalid tool type: ${toolCall.type}. Please check your implementation or input.`
+        );
+        return;
+      }
+
       if (!selectedToolComponent && !selectedToolUI) {
         selectedToolComponent = TOOL_COMPONENT_MAP[toolCall.type];
-        if (!selectedToolComponent.loading) {
-          console.error(`No 'loading' method defined for tool type: ${toolCall.type}`);
+
+        if (!selectedToolComponent) {
+          console.error(
+            `No component found for tool type: ${toolCall.type}. Please ensure TOOL_COMPONENT_MAP includes an entry for this type.`
+          );
           return;
         }
+
+        if (!selectedToolComponent.loading) {
+          console.error(
+            `No 'loading' method defined for tool type: ${toolCall.type}`
+          );
+          return;
+        }
+        console.log("selectedToolComponent", selectedToolComponent);
         selectedToolUI = createStreamableUI(selectedToolComponent.loading());
         fields.ui.append(selectedToolUI?.value);
       }
@@ -119,6 +138,7 @@ async function agent(inputs: {
 
     if (selectedToolUI && selectedToolComponent) {
       const toolData = event.data.output.tool_result;
+      console.log("toolData", toolData);
       selectedToolUI.done(selectedToolComponent.final(toolData));
     }
   };
