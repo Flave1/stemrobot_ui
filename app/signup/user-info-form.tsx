@@ -14,8 +14,6 @@ function MarketTicker() {
     { symbol: "EUR/USD", price: 1.18, change: -0.3 },
     { symbol: "TSLA", price: 750, change: 3.2 },
     { symbol: "AMZN", price: 3500, change: -2.1 },
-    // { symbol: "GBP/USD", price: 1.38, change: 0.4 },
-    // { symbol: "XRP/USD", price: 0.85, change: -0.7 },
     { symbol: "MSFT", price: 290, change: 1.1 },
   ]);
 

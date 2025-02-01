@@ -3,7 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import { ReactNode } from "react";
 import { EndpointsContext } from "./agent";
-import { Manrope } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   description: "Crypto / trade trade robot",
 };
 
-const manrope = Manrope({ subsets: ["latin"] });
-
+// const manrope = Manrope({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout(props: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -46,7 +46,7 @@ export default function RootLayout(props: { children: ReactNode }) {
         </div> */}
 
         <div
-          className={`relative w-full h-screen bg-black text-white overflow-hidden   flex min-h-screen flex-col antialiased   ${manrope.className}`}
+          className={`relative w-full h-screen bg-black text-white overflow-hidden   flex min-h-screen flex-col antialiased   ${inter.className}`}
         >
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <TooltipProvider delayDuration={0}>
