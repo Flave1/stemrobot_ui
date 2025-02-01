@@ -83,7 +83,7 @@ function ChatForm({ className, ...props }: React.ComponentProps<"div">) {
         >
           <AutoResizeTextarea
             onKeyDown={handleKeyDown}
-            onChange={(e: any) => setInput(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
             value={input}
             placeholder="Type your message..."
             className="flex-1 resize-none bg-transparent focus:outline-none"

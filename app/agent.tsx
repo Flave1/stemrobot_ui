@@ -4,45 +4,59 @@ import "server-only";
 import { StreamEvent } from "@langchain/core/tracers/log_stream";
 import { EventHandlerFields } from "@/utils/server";
 import { Github, GithubLoading } from "@/components/prebuilt/github";
+import { createStreamableUI, createStreamableValue } from "ai/rsc";
+import { AIMessage } from "@/ai/message";
+import {
+  CurrencyRatesProps,
+  CurrentWeatherProps,
+  DemoGithubProps,
+  InvoiceProps,
+} from "@/components/types/tools";
+import {
+  CurrencyRatesLoading,
+  CurrencyRates,
+} from "@/components/prebuilt/currencies";
 import { InvoiceLoading, Invoice } from "@/components/prebuilt/invoice";
 import {
   CurrentWeatherLoading,
   CurrentWeather,
 } from "@/components/prebuilt/weather";
-import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { AIMessage } from "@/ai/message";
-import {
-  CurrencyRates,
-  CurrencyRatesLoading,
-} from "@/components/prebuilt/currencies";
 
 const API_URL = "http://localhost:8000/chat";
 
 type ToolComponent = {
-  loading: (props?: any) => JSX.Element;
-  final: (props?: any) => JSX.Element;
+  loading: () => JSX.Element;
+  final: (props: any) => JSX.Element;
 };
 
+// type ToolComponentMap = {
+//   [tool: string]: ToolComponent;
+// };
+
 type ToolComponentMap = {
-  [tool: string]: ToolComponent;
+  [key: string]: {
+    loading: () => JSX.Element;
+    final: (props: any) => JSX.Element;
+  };
 };
 
 const TOOL_COMPONENT_MAP: ToolComponentMap = {
   "github-repo": {
-    loading: (props?: any) => <GithubLoading {...props} />,
-    final: (props?: any) => <Github {...props} />,
+    loading: () => <GithubLoading />,
+    // final: (props) => <Github {...props} />,
+    final: (props) => <Github {...props} />
   },
   "invoice-parser": {
-    loading: (props?: any) => <InvoiceLoading {...props} />,
-    final: (props?: any) => <Invoice {...props} />,
+    loading: () => <InvoiceLoading />,
+    final: (props) => <Invoice {...props} />,
   },
   "weather-data": {
-    loading: (props?: any) => <CurrentWeatherLoading {...props} />,
-    final: (props?: any) => <CurrentWeather {...props} />,
+    loading: () => <CurrentWeatherLoading />,
+    final: (props) => <CurrentWeather {...props} />,
   },
   "get-available-currencies": {
-    loading: (props?: any) => <CurrencyRatesLoading {...props} />,
-    final: (props?: any) => <CurrencyRates {...props} />,
+    loading: () => <CurrencyRatesLoading />,
+    final: (props) => <CurrencyRates {...props} />,
   },
 };
 

@@ -1,42 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text, Grid } from "@react-three/drei";
-import { Manrope } from "next/font/google";
-import Link from "next/link";
-import * as THREE from "three";
 import Header from "@/components/prebuilt/header";
 
-const manrope = Manrope({ subsets: ["latin"] });
-
-function SpinningLogo() {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.5;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="#4a90e2" />
-      </mesh>
-      <mesh position={[0.5, 0.5, 0.5]}>
-        <boxGeometry args={[0.5, 0.5, 0.5]} />
-        <meshStandardMaterial color="#ffd700" />
-      </mesh>
-      <mesh position={[-0.5, -0.5, -0.5]}>
-        <boxGeometry args={[0.5, 0.5, 0.5]} />
-        <meshStandardMaterial color="#66bb6a" />
-      </mesh>
-    </group>
-  );
-}
 
 function MarketTicker() {
   const [tickerData, setTickerData] = useState([

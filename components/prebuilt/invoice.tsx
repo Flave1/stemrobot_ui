@@ -22,40 +22,9 @@ import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { format } from "date-fns";
+import { InvoiceProps } from "../types/tools";
 
-export type LineItem = {
-  id: string;
-  name: string;
-  quantity: number;
-  price: number;
-};
 
-export type ShippingAddress = {
-  name: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-};
-
-export type CustomerInfo = {
-  name: string;
-  email?: string;
-  phone?: string;
-};
-
-export type PaymentInfo = {
-  cardType: string;
-  cardNumberLastFour: string;
-};
-
-export interface InvoiceProps {
-  orderId: string;
-  lineItems: LineItem[];
-  shippingAddress?: ShippingAddress;
-  customerInfo?: CustomerInfo;
-  paymentInfo?: PaymentInfo;
-}
 
 export function InvoiceLoading(): JSX.Element {
   return (

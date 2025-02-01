@@ -4,12 +4,9 @@ import { Card } from "../ui/card";
 import { format } from "date-fns";
 import { Progress } from "../ui/progress";
 import { Skeleton } from "../ui/skeleton";
+import { CurrentWeatherProps } from "../types/tools";
 
-export interface CurrentWeatherProps {
-  temperature: number;
-  city: string;
-  state: string;
-}
+
 
 export function CurrentWeatherLoading(): JSX.Element {
   return (

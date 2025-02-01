@@ -1,13 +1,10 @@
 "use client";
 
+import { CurrencyRatesProps } from "../types/tools";
 import { Card } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
-export interface CurrencyRatesProps {
-  currencyPairs: string[];
-  rates: Record<string, number>;
-  marketType: string;
-}
+
 
 export function CurrencyRatesLoading(): JSX.Element {
   return (

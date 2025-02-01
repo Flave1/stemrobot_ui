@@ -12,14 +12,9 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { format } from "date-fns";
+import { DemoGithubProps } from "../types/tools";
 
-export interface DemoGithubProps {
-  owner: string;
-  repo: string;
-  description: string;
-  stars: number;
-  language: string;
-}
+
 
 export function GithubLoading(): JSX.Element {
   return (

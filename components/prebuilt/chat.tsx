@@ -6,17 +6,10 @@ import { Button } from "../ui/button";
 import { EndpointsContext } from "@/app/agent";
 import { useActions } from "@/utils/client";
 import { LocalContext } from "@/app/shared";
-import { RemoteRunnable } from "@langchain/core/runnables/remote";
-import { Github, GithubLoading } from "./github";
-import { Invoice, InvoiceLoading } from "./invoice";
-import { CurrentWeather, CurrentWeatherLoading } from "./weather";
-import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { StreamEvent } from "@langchain/core/tracers/log_stream";
-import { AIMessage } from "@/ai/message";
 import { HumanMessageText } from "./message";
 import { FaLocationArrow } from "react-icons/fa";
 
-export interface ChatProps {}
+// export interface ChatProps {}
 
 function convertFileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -50,7 +43,7 @@ export default function Chat() {
   async function onSubmit(input: string) {
     const newElements = [...elements];
     let base64File: string | undefined = undefined;
-    let fileExtension = selectedFile?.type.split("/")[1];
+    const fileExtension = selectedFile?.type.split("/")[1];
     if (selectedFile) {
       base64File = await convertFileToBase64(selectedFile);
     }
@@ -80,7 +73,7 @@ export default function Chat() {
     // consume the value stream to obtain the final string value
     // after which we can append to our chat history state
     (async () => {
-      let lastEvent = await element.lastEvent;
+      const lastEvent = await element.lastEvent;
       if (Array.isArray(lastEvent)) {
         if (lastEvent[0].invoke_model && lastEvent[0].invoke_model.result) {
           setHistory((prev) => [

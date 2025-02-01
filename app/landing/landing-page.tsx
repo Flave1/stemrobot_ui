@@ -48,7 +48,8 @@ function AnimatedBox({
     return () => clearInterval(interval);
   }, [currentPosition, targetPosition, getAdjacentIntersection]); // Added dependencies
 
-  useFrame((state, delta) => {
+  useFrame(() => {
+    // state, delta
     if (meshRef.current) {
       currentPosition.current.lerp(targetPosition, 0.05);
       meshRef.current.position.copy(currentPosition.current);
@@ -140,7 +141,8 @@ function Scene() {
         cellThickness={0.5}
         sectionSize={3}
         sectionThickness={1}
-        sectionColor={[0.5, 0.5, 0.5]}
+        sectionColor={'0.5, 0.5, 0.5'}
+        // sectionColor={[0.5, 0.5, 0.5]}
         fadeDistance={50}
       />
       {initialPositions.map((position, index) => (
