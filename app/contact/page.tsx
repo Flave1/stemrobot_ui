@@ -29,7 +29,7 @@ export default function ContactUs() {
   const chatEndRef = useRef<HTMLDivElement>(null)
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/pages/api/contact",
+    api: "/api/contact",
     initialMessages: [
       {
         id: "1",
