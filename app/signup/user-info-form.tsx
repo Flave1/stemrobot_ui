@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/prebuilt/header";
+import { signIn } from "next-auth/react";
 
 
 function MarketTicker() {
@@ -69,32 +70,46 @@ export default function UserInfoForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    router.push("/");
-  };
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (response.ok) {
+        console.log("User registered successfully")
+        router.push("/")
+      } else {
+        console.error("Failed to register user")
+      }
+    } catch (error) {
+      console.error("An error occurred while registering the user:", error)
+    }
+  }
+
+  const handleGoogleSignUp = () => {
+    signIn("google", { callbackUrl: "/" })
+  }
 
   return (
     <>
       <Header />
       <div className="relative z-10">
 
-        <main className="flex items-center justify-center p-4">
+      <main className="flex items-center justify-center p-4">
           <div className="max-w-md w-full space-y-8 bg-gray-900 bg-opacity-80 p-8 rounded-xl shadow-lg backdrop-blur-sm">
             <div>
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-blue-400">
-                Create Your Account
-              </h2>
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-blue-400">Create Your Account</h2>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="rounded-md shadow-sm space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium text-gray-300 mb-1"
-                    >
+                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-300 mb-1">
                       First Name
                     </label>
                     <input
@@ -109,10 +124,7 @@ export default function UserInfoForm() {
                     />
                   </div>
                   <div>
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium text-gray-300 mb-1"
-                    >
+                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-300 mb-1">
                       Last Name
                     </label>
                     <input
@@ -128,10 +140,7 @@ export default function UserInfoForm() {
                   </div>
                 </div>
                 <div>
-                  <label
-                    htmlFor="email-address"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
+                  <label htmlFor="email-address" className="block text-sm font-medium text-gray-300 mb-1">
                     Email address
                   </label>
                   <input
@@ -147,10 +156,7 @@ export default function UserInfoForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
                     Phone number
                   </label>
                   <input
@@ -166,10 +172,7 @@ export default function UserInfoForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="address"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">
                     Address (optional)
                   </label>
                   <input
@@ -184,10 +187,7 @@ export default function UserInfoForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="post-code"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
+                  <label htmlFor="post-code" className="block text-sm font-medium text-gray-300 mb-1">
                     Post Code (optional)
                   </label>
                   <input
@@ -203,12 +203,28 @@ export default function UserInfoForm() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col space-y-4">
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
                 >
                   Create Account
+                </button>
+                <button
+                  type="button"
+                  onClick={handleGoogleSignUp}
+                  className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                >
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <svg
+                      className="h-5 w-5 text-gray-500 group-hover:text-gray-400"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
+                    </svg>
+                  </span>
+                  Sign up with Google
                 </button>
               </div>
             </form>

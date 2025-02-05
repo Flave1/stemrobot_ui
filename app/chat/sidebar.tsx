@@ -4,6 +4,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { X } from "lucide-react"
 import type { Message } from "ai"
 import type React from "react" // Added import for React
+import { ExitIcon } from "@radix-ui/react-icons"
+import Link from "next/link"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean
@@ -12,6 +14,14 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Sidebar({ open, setOpen, messages, className, ...props }: SidebarProps) {
+  const tempmessages: Message = {
+    content: "History not available",
+    role: "system",
+    id: "id"
+  }
+  if(messages.length == 0){
+    messages.push(tempmessages)
+  }
   return (
     <div
       className={cn(
@@ -23,10 +33,12 @@ export function Sidebar({ open, setOpen, messages, className, ...props }: Sideba
     >
       <div className="flex items-center justify-between p-4">
         <h2 className="text-lg font-semibold">Chat History</h2>
+      
         <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
           <X className="h-5 w-5" />
         </Button>
       </div>
+      
       <ScrollArea className="flex-1">
         {messages.map((message, index) => (
           <div key={index} className="border-b border-border p-4 text-sm">

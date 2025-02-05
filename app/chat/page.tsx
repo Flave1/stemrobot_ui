@@ -1,13 +1,11 @@
 "use client";
 
-import { ChatForm } from "./chat-form";
-
-// import Chat from "@/components/prebuilt/chat";
+import Chat from "@/app/chat/chat";
 
 export default function Page() {
   return (
     <div className="min-h-screen text-foreground">
-      <ChatForm />
+      <Chat />
     </div>
   )
 }

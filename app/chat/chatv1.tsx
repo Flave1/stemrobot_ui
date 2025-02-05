@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 import { EndpointsContext } from "@/app/agent";
 import { useActions } from "@/utils/client";
 import { LocalContext } from "@/app/shared";
-import { HumanMessageText } from "./message";
+import { HumanMessageText } from "../../components/prebuilt/message";
 import { FaLocationArrow } from "react-icons/fa";
 
 // export interface ChatProps {}
@@ -33,7 +33,7 @@ function FileUploadMessage({ file }: { file: File }) {
   );
 }
 
-export default function Chat() {
+export default function Chatv1() {
   const actions = useActions<typeof EndpointsContext>();
   const [elements, setElements] = useState<JSX.Element[]>([]);
   const [history, setHistory] = useState<[role: string, content: string][]>([]);

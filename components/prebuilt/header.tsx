@@ -3,8 +3,28 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 const Header = () => {
+
+  const { data: session } = useSession()
+
+  if (session) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold mb-4">Welcome, {session.user?.name}!</h1>
+        <p className="mb-4">You are signed in as {session.user?.email}</p>
+        <button
+          onClick={() => signOut()}
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Sign out
+        </button>
+      </div>
+    )
+  }
+
     function SpinningLogo() {
         const groupRef = useRef<THREE.Group>(null);
       
@@ -56,12 +76,12 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-300">
+              <a href="/pricing" className="hover:text-gray-300">
                 Pricing
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-300">
+              <a href="/contact" className="hover:text-gray-300">
                 Contact
               </a>
             </li>

@@ -4,8 +4,7 @@ import Script from "next/script";
 import { ReactNode } from "react";
 import { EndpointsContext } from "./agent";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { SessionProviders } from "./providers";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -46,13 +45,11 @@ export default function RootLayout(props: { children: ReactNode }) {
         </div> */}
 
         <div
-          className={`relative w-full h-screen bg-black text-white overflow-hidden   flex min-h-screen flex-col antialiased   ${inter.className}`}
+          className={`relative w-full h-screen bg-black text-white overflow-hidden  flex min-h-screen flex-col antialiased   ${inter.className}`}
         >
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <TooltipProvider delayDuration={0}>
-              <EndpointsContext>{props.children}</EndpointsContext>
-            </TooltipProvider>
-          </ThemeProvider>
+          <SessionProviders>
+            <EndpointsContext>{props.children}</EndpointsContext>
+          </SessionProviders>
         </div>
       </body>
     </html>
