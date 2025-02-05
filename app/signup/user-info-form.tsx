@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MarketTicker from "@/components/prebuilt/marketTicker";
-// import Header from "@/components/prebuilt/header";
-// import { signIn } from "next-auth/react";
+import Header from "@/components/prebuilt/header";
+import { signIn } from "next-auth/react";
 
 export default function UserInfoForm() {
   const router = useRouter();
@@ -44,13 +44,13 @@ export default function UserInfoForm() {
     }
   };
 
-  // const handleGoogleSignUp = () => {
-  //   signIn("google", { callbackUrl: "/" });
-  // };
+  const handleGoogleSignUp = () => {
+    signIn("google", { callbackUrl: "/" });
+  };
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="relative z-10">
         <main className="flex items-center justify-center p-4">
           <div className="max-w-md w-full space-y-8 bg-gray-900 bg-opacity-80 p-8 rounded-xl shadow-lg backdrop-blur-sm">

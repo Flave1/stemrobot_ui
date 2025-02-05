@@ -17,6 +17,7 @@ const handler = NextAuth({
       return true
     },
     async session({ session, user }) {
+      console.log("session", session)
       // You can add custom session logic here
       return session
     },

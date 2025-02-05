@@ -4,7 +4,7 @@ import Script from "next/script";
 import { ReactNode } from "react";
 import { EndpointsContext } from "./agent";
 import { Inter } from "next/font/google";
-import { SessionProviders } from "./providers";
+import { SessionProvider } from "next-auth/react";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -26,32 +26,32 @@ export const metadata: Metadata = {
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout(props: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-J11BX1543V"
-      ></script>
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
+    <SessionProvider>
+      <html lang="en" suppressHydrationWarning>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-J11BX1543V"
+        ></script>
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-J11BX1543V');
         `}
-      </Script>
-      <body>
-        {/* <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        </Script>
+        <body>
+          {/* <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <EndpointsContext>{props.children}</EndpointsContext>
         </div> */}
 
-        <div
-          className={`relative w-full h-screen bg-black text-white overflow-hidden  flex min-h-screen flex-col antialiased   ${inter.className}`}
-        >
-          <SessionProviders>
+          <div
+            className={`relative w-full h-screen bg-black text-white overflow-hidden  flex min-h-screen flex-col antialiased   ${inter.className}`}
+          >
             <EndpointsContext>{props.children}</EndpointsContext>
-          </SessionProviders>
-        </div>
-      </body>
-    </html>
+          </div>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
