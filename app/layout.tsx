@@ -4,23 +4,11 @@ import Script from "next/script";
 import { ReactNode } from "react";
 import { EndpointsContext } from "./agent";
 import { Inter } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
 import SessionWrapper from "@/components/SessionWrapper";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
-
 export const metadata: Metadata = {
-  title: "Crypto / Forex trade robot",
-  description: "Crypto / trade trade robot",
+  title: "AI trade Assistant",
+  description: "AI trade Assistant",
 };
 
 // const manrope = Manrope({ subsets: ["latin"] });
@@ -42,10 +30,6 @@ export default function RootLayout(props: { children: ReactNode }) {
         `}
         </Script>
         <body>
-          {/* <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <EndpointsContext>{props.children}</EndpointsContext>
-        </div> */}
-
           <div
             className={`relative w-full h-screen bg-black text-white overflow-hidden  flex min-h-screen flex-col antialiased   ${inter.className}`}
           >

@@ -6,9 +6,11 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { CheckCheck, DollarSign, HomeIcon, Text } from "lucide-react";
 
 const Header = () => {
   const { data: session } = useSession();
+  console.log("session", session);
   if (session) {
     return (
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
@@ -67,23 +69,27 @@ const Header = () => {
         </div>
         <ul className="flex space-x-6">
           <li>
-            <Link href="/" className="hover:text-gray-300">
+            <Link href="/" className="hover:text-gray-300 flex">
+              <HomeIcon className="pr-1" />
               Home
             </Link>
           </li>
           <li>
-            <Link href="/signup" className="hover:text-gray-300">
+            <Link href="/auth/signup" className="hover:text-gray-300 flex">
+              <CheckCheck className="pr-1" />
               Try it out
             </Link>
           </li>
           <li>
-            <Link href="/pricing" className="hover:text-gray-300">
+            <Link href="/pricing" className="hover:text-gray-300 flex">
+              <DollarSign className="pr-1" />
               Pricing
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:text-gray-300">
-              Contact
+            <Link href="/contact" className="hover:text-gray-300 flex">
+              <Text className="pr-1" />
+              Chat with us
             </Link>
           </li>
           {/* {session && (

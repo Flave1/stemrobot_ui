@@ -8,7 +8,6 @@ import Link from "next/link";
 import Header from "@/components/prebuilt/header";
 import MarketTicker from "@/components/prebuilt/marketTicker";
 
-
 function AnimatedBox({
   initialPosition,
   symbol,
@@ -142,7 +141,7 @@ function Scene() {
         cellThickness={0.5}
         sectionSize={3}
         sectionThickness={1}
-        sectionColor={'0.5, 0.5, 0.5'}
+        sectionColor={"0.5, 0.5, 0.5"}
         // sectionColor={[0.5, 0.5, 0.5]}
         fadeDistance={50}
       />
@@ -160,28 +159,29 @@ function Scene() {
 export default function LandinPage() {
   return (
     <>
-     <Header />
-      <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-        <h1 className="text-6xl font-bold mb-8 max-w-4xl mx-auto">
-          AI-Powered Trading Across Markets
-        </h1>
-        <h2 className="text-xl mb-10">
-          Trade stocks, crypto, and forex with intelligent insights
-        </h2>
-        <Link
-          href="/chat"
-          className="bg-blue-500 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-600 transition duration-300"
+      <Header />
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
+          <h1 className="text-6xl font-bold mb-8 max-w-4xl mx-auto">
+            AI-Powered Trading Across Markets
+          </h1>
+          <h2 className="text-xl mb-10">
+            Trade stocks, crypto, and forex with intelligent insights
+          </h2>
+          <Link
+            href="/chat"
+            className="bg-blue-500 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-600 transition duration-300"
+          >
+            Start Trading
+          </Link>
+        </div>
+        <Canvas
+          shadows
+          camera={{ position: [30, 30, 30], fov: 50 }}
+          className="absolute inset-0"
         >
-          Start Trading
-        </Link>
-      </div>
-      <Canvas
-        shadows
-        camera={{ position: [30, 30, 30], fov: 50 }}
-        className="absolute inset-0"
-      >
-        <Scene />
-      </Canvas>
+          <Scene />
+        </Canvas>
+
       <MarketTicker />
     </>
   );
