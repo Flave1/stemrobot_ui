@@ -6,7 +6,7 @@ import { ArrowUpIcon, DollarSign, Bitcoin, TrendingUp, HelpCircle, Menu } from "
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
 // import { AutoResizeTextarea } from "@/components/autoresize-textarea"
-import { ThemeToggle } from "@/components/theme-toggle"
+// import { ThemeToggle } from "@/components/theme-toggle"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState } from "react"
 // import { Sidebar } from "@/components/sidebar"
@@ -85,7 +85,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"div">) {
             <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
               <Menu className="h-5 w-5" />
             </Button>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
           <div className="flex flex-1 flex-col items-center">
             <div className="w-full md:w-[70%] flex flex-1 flex-col p-4 sm:p-8">

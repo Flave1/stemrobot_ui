@@ -54,8 +54,8 @@ export default function ContactUs() {
     if (session?.user) {
       setUserInfo((prevInfo) => ({
         ...prevInfo,
-        fullName: session.user.name || "",
-        email: session.user.email || "",
+        fullName: session?.user?.name || "",
+        email: session?.user?.email || "",
       }))
     }
   }, [session])
