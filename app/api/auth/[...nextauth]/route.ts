@@ -1,28 +1,7 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
-const handler = NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-  ],
-  pages: {
-    signIn: "/signup",
-  },
-  callbacks: {
-    async signIn({ user, account, profile }) {
-      // You can add custom logic here, such as creating a user in your database
-      return true
-    },
-    async session({ session, user }) {
-      console.log("session", session)
-      // You can add custom session logic here
-      return session
-    },
-  },
-})
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
-
+export const GET = handler;
+export const POST = handler;

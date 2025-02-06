@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { EndpointsContext } from "./agent";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import SessionWrapper from "@/components/SessionWrapper";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout(props: { children: ReactNode }) {
   return (
-    <SessionProvider>
+    <SessionWrapper>
       <html lang="en" suppressHydrationWarning>
         <script
           async
@@ -52,6 +53,6 @@ export default function RootLayout(props: { children: ReactNode }) {
           </div>
         </body>
       </html>
-    </SessionProvider>
+    </SessionWrapper>
   );
 }

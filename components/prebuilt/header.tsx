@@ -1,3 +1,4 @@
+"use client"
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -9,6 +10,8 @@ import { signOut } from "next-auth/react"
 const Header = () => {
 
   const { data: session } = useSession()
+
+  console.log("session", session)
 
   if (session) {
     return (
