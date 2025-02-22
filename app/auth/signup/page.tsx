@@ -1,186 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
-import MarketTicker from "@/components/prebuilt/marketTicker";
 import Header from "@/components/prebuilt/header";
-import { signIn } from "next-auth/react";
-import AuthWrapper from "../auth-wrapper";
+import MarketTicker from "@/components/prebuilt/marketTicker";
+import Image from "next/image";
 
-export default function UserInfoForm() {
+export default function Signup() {
+  const { user, signInWithGoogle, error } = useAuth();
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    address: "",
-    postCode: "",
-  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    if (user) {
+      router.push('/');
+    }
+  }, [user, router]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleGoogleSignUp = async () => {
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        console.log("User registered successfully");
-        router.push("/");
-      } else {
-        console.error("Failed to register user");
-      }
+      await signInWithGoogle();
     } catch (error) {
-      console.error("An error occurred while registering the user:", error);
+      console.error('Error signing up with Google:', error);
     }
   };
 
-  const handleGoogleSignUp = () => {
-    signIn("google", { callbackUrl: "/" });
-  };
-
   return (
-    <>
+    <div className="min-h-screen bg-black text-white overflow-y-auto">
       <Header />
-      <AuthWrapper type="signup">
-        <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="first-name"
-                  className="block text-sm font-medium text-gray-300 mb-1"
-                >
-                  First Name
-                </label>
-                <input
-                  id="first-name"
-                  name="firstName"
-                  type="text"
-                  required
-                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="John"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="last-name"
-                  className="block text-sm font-medium text-gray-300 mb-1"
-                >
-                  Last Name
-                </label>
-                <input
-                  id="last-name"
-                  name="lastName"
-                  type="text"
-                  required
-                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Doe"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="email-address"
-                className="block text-sm font-medium text-gray-300 mb-1"
-              >
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="john@example.com"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-300 mb-1"
-              >
-                Phone number
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="+1 (555) 123-4567"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-            {/* <div>
-                  <label
-                    htmlFor="address"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
-                    Address (optional)
-                  </label>
-                  <input
-                    id="address"
-                    name="address"
-                    type="text"
-                    autoComplete="street-address"
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="123 Main St, City, State"
-                    value={formData.address}
-                    onChange={handleChange}
-                  />
-                </div> */}
-            {/* <div>
-                  <label
-                    htmlFor="post-code"
-                    className="block text-sm font-medium text-gray-300 mb-1"
-                  >
-                    Post Code (optional)
-                  </label>
-                  <input
-                    id="post-code"
-                    name="postCode"
-                    type="text"
-                    autoComplete="postal-code"
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-500 text-white bg-gray-800 bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="12345"
-                    value={formData.postCode}
-                    onChange={handleChange}
-                  />
-                </div> */}
-          </div>
+      
+      <main className="w-full pt-28 pb-24">
+        <div className="max-w-md mx-auto px-4 sm:px-6">
+          <div className="bg-gray-900/50 rounded-xl p-8 backdrop-blur-sm">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
+              Create your account
+            </h1>
+            <p className="text-gray-400 text-center mb-8">
+              Start trading with Stembots today
+            </p>
 
-          <div className="flex flex-col space-y-4">
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+                {error}
+              </div>
+            )}
+
             <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+              onClick={handleGoogleSignUp}
+              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-white hover:bg-gray-100 transition-colors"
             >
-              Create Account
+              <Image 
+                src="/google.svg" 
+                alt="Google" 
+                width={20} 
+                height={20} 
+                className="w-5 h-5"
+              />
+              <span className="text-gray-900 font-medium">Continue with Google</span>
             </button>
+
+            <p className="mt-6 text-center text-sm text-gray-400">
+              Already have an account?{" "}
+              <a href="/auth/signin" className="text-blue-500 hover:text-blue-400">
+                Sign in
+              </a>
+            </p>
           </div>
-        </form>
-      </AuthWrapper>
-      <MarketTicker />
-    </>
+        </div>
+      </main>
+
+      <div className="fixed bottom-0 left-0 right-0">
+        <MarketTicker />
+      </div>
+    </div>
   );
 }

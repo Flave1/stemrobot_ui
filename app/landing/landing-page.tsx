@@ -46,10 +46,9 @@ function AnimatedBox({
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [currentPosition, targetPosition, getAdjacentIntersection]); // Added dependencies
+  }, []);
 
   useFrame(() => {
-    // state, delta
     if (meshRef.current) {
       currentPosition.current.lerp(targetPosition, 0.05);
       meshRef.current.position.copy(currentPosition.current);
@@ -141,8 +140,7 @@ function Scene() {
         cellThickness={0.5}
         sectionSize={3}
         sectionThickness={1}
-        sectionColor={"0.5, 0.5, 0.5"}
-        // sectionColor={[0.5, 0.5, 0.5]}
+        sectionColor={new THREE.Color(0.5, 0.5, 0.5)}
         fadeDistance={50}
       />
       {initialPositions.map((position, index) => (
@@ -156,33 +154,54 @@ function Scene() {
   );
 }
 
-export default function LandinPage() {
+export default function LandingPage() {
   return (
-    <>
+    <div className="min-h-screen bg-black text-white">
       <Header />
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-          <h1 className="text-6xl font-bold mb-8 max-w-4xl mx-auto">
-            AI-Powered Trading Across Markets
+      <main className="relative">
+        {/* Hero Section */}
+        <div className="relative z-[1] h-screen flex flex-col items-center justify-center text-center px-4">
+          <h1 className="text-4xl sm:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+            AI-Powered Trading Assistant
           </h1>
-          <h2 className="text-xl mb-10">
-            Trade stocks, crypto, and forex with intelligent insights
-          </h2>
-          <Link
-            href="/chat"
-            className="bg-blue-500 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-600 transition duration-300"
-          >
-            Start Trading
-          </Link>
+          <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Make smarter trading decisions with real-time market analysis and AI-driven insights
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link
+              href="/chat"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+            >
+              Start Trading
+            </Link>
+            <Link
+              href="/learn"
+              className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+            >
+              Learn More
+            </Link>
+          </div>
         </div>
-        <Canvas
-          shadows
-          camera={{ position: [30, 30, 30], fov: 50 }}
-          className="absolute inset-0"
-        >
-          <Scene />
-        </Canvas>
 
-      <MarketTicker />
-    </>
+        {/* 3D Scene Background */}
+        <div className="absolute inset-0 z-0">
+          <Canvas
+            shadows
+            camera={{ position: [30, 30, 30], fov: 50 }}
+            className="absolute inset-0"
+          >
+            <Scene />
+          </Canvas>
+        </div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black pointer-events-none" />
+
+        {/* Market Ticker */}
+        <div className="absolute bottom-0 left-0 right-0 z-[2]">
+          <MarketTicker />
+        </div>
+      </main>
+    </div>
   );
 }

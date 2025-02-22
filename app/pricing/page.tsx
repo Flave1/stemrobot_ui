@@ -1,6 +1,6 @@
 import PricingScreen from "./pricing-screen"
 
-export default function Home() {
+export default function Pricing() {
   return <PricingScreen />
 }
 

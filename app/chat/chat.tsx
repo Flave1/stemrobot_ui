@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
 import { EndpointsContext } from "@/app/agent";
 import { useActions } from "@/utils/client";
 import { LocalContext } from "@/app/shared";
 import { HumanMessageText } from "../../components/prebuilt/message";
-import { FaLocationArrow } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
@@ -28,6 +26,8 @@ import { AutoResizeTextarea } from "./autoresize-textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { ExitIcon } from "@radix-ui/react-icons";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // export interface ChatProps {}
 
@@ -63,6 +63,7 @@ export default function Chat({
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   async function onSubmit(input: string) {
     const newElements = [...elements];
@@ -84,10 +85,10 @@ export default function Chat({
     });
 
     newElements.push(
-      <div className="flex flex-col w-full gap-1 mt-auto" key={history.length}>
+      <div className="flex flex-col w-full gap-1 mt-auto" key={history.length} >
         {selectedFile && <FileUploadMessage file={selectedFile} />}
         <HumanMessageText content={input} />
-        <div className="flex flex-col gap-1 w-full max-w-fit mr-auto">
+        <div className="flex flex-col gap-1 w-full max-w-fit mr-auto" >
           {element.ui}
         </div>
       </div>
@@ -142,8 +143,8 @@ export default function Chat({
   const actionWidgets = [
     {
       icon: DollarSign,
-      label: "Trade Currency",
-      suggestion: "What currency do you want to trade today?",
+      label: "BTC/USD",
+      suggestion: "What is the price of btcusd today?",
     },
     {
       icon: Bitcoin,
@@ -196,8 +197,7 @@ export default function Chat({
       <div className={cn("flex h-screen w-full", className)} {...props}>
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} messages={[]} />
         <div className="flex flex-1 flex-col">
-         
-          <div className="flex items-center justify-between p-4">
+          <div className="flex items-center justify-between p-4 border-b border-gray-800">
             <Button
               variant="ghost"
               size="icon"
@@ -205,16 +205,39 @@ export default function Chat({
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <Link href={"/"}>
-              <ExitIcon className="h-5 w-5" />
-            </Link>
+
+            <div className="flex items-center gap-4">
+              {user && (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-gray-400">
+                    {user.displayName}
+                  </span>
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user.photoURL || ''} />
+                    <AvatarFallback>
+                      {user.displayName?.charAt(0) || user.email?.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+              )}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/">
+                    <Button variant="ghost" size="icon">
+                      <ExitIcon className="h-5 w-5" />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>Exit Chat</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
           <div className="flex flex-1 flex-col items-center">
             <div className="w-full md:w-[70%] flex flex-1 flex-col p-4 sm:p-8">
-              <div className="flex flex-1 flex-col">
+              <div className="flex flex-1 overflow-y-auto max-h-screen max-h-[80vh] flex-col-reverse">
                 {!history.length && header}
                 <LocalContext.Provider value={onSubmit}>
-                  <div className="flex flex-col w-full gap-1 mt-auto">
+                  <div className="flex flex-col w-full gap-1 mt-auto ">
                     {elements}
                   </div>
                 </LocalContext.Provider>

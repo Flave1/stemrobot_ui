@@ -7,12 +7,6 @@ import { Github, GithubLoading } from "@/components/prebuilt/github";
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
 import { AIMessage } from "@/ai/message";
 import {
-  CurrencyRatesProps,
-  CurrentWeatherProps,
-  DemoGithubProps,
-  InvoiceProps,
-} from "@/components/types/tools";
-import {
   CurrencyRatesLoading,
   CurrencyRates,
 } from "@/components/prebuilt/currencies";
@@ -21,29 +15,42 @@ import {
   CurrentWeatherLoading,
   CurrentWeather,
 } from "@/components/prebuilt/weather";
+import { InternetSearch, InternetSearchLoading } from "@/components/prebuilt/search";
+import { ComponentProps } from "react";
 
-const API_URL = "http://localhost:8000/chat";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/chat";
 
 type ToolComponent = {
   loading: () => JSX.Element;
   final: (props: any) => JSX.Element;
 };
 
-// type ToolComponentMap = {
-//   [tool: string]: ToolComponent;
-// };
-
 type ToolComponentMap = {
-  [key: string]: {
+  "github-repo": {
     loading: () => JSX.Element;
-    final: (props: any) => JSX.Element;
+    final: (props: ComponentProps<typeof Github>) => JSX.Element;
+  };
+  "invoice-parser": {
+    loading: () => JSX.Element;
+    final: (props: ComponentProps<typeof Invoice>) => JSX.Element;
+  };
+  "weather-data": {
+    loading: () => JSX.Element;
+    final: (props: ComponentProps<typeof CurrentWeather>) => JSX.Element;
+  };
+  "get-available-currencies": {
+    loading: () => JSX.Element;
+    final: (props: ComponentProps<typeof CurrencyRates>) => JSX.Element;
+  };
+  "search-tavily": {
+    loading: () => JSX.Element;
+    final: (props: ComponentProps<typeof InternetSearch>) => JSX.Element;
   };
 };
 
 const TOOL_COMPONENT_MAP: ToolComponentMap = {
   "github-repo": {
     loading: () => <GithubLoading />,
-    // final: (props) => <Github {...props} />,
     final: (props) => <Github {...props} />
   },
   "invoice-parser": {
@@ -57,6 +64,10 @@ const TOOL_COMPONENT_MAP: ToolComponentMap = {
   "get-available-currencies": {
     loading: () => <CurrencyRatesLoading />,
     final: (props) => <CurrencyRates {...props} />,
+  },
+  "search-tavily": {
+    loading: () => <InternetSearchLoading />,
+    final: (props) => <InternetSearch {...props} />,
   },
 };
 
@@ -88,6 +99,8 @@ async function agent(inputs: {
     fields: EventHandlerFields
   ) => {
     const [type] = event.event.split("_").slice(2);
+
+    console.log("event", event.data)
     if (
       type !== "end" ||
       !event.data.output ||
@@ -111,7 +124,7 @@ async function agent(inputs: {
       }
 
       if (!selectedToolComponent && !selectedToolUI) {
-        selectedToolComponent = TOOL_COMPONENT_MAP[toolCall.type];
+        selectedToolComponent = TOOL_COMPONENT_MAP[toolCall.type as keyof ToolComponentMap];
 
         if (!selectedToolComponent) {
           console.error(

@@ -1,6 +1,6 @@
 import "server-only";
 import { AIProvider } from "./client";
-import { ReactNode } from "react";
+import { cache, ReactNode } from "react";
 import { Runnable } from "@langchain/core/runnables";
 import { CompiledStateGraph } from "@langchain/langgraph";
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
@@ -34,48 +34,52 @@ export function streamRunnableUI<RunInput, RunOutput>(
   inputs: RunInput,
   options: {
     eventHandlers: Array<EventHandler>;
-  },
+  }
 ) {
   const ui = createStreamableUI();
   const [lastEvent, resolve] = withResolvers<
     Array<any> | Record<string, any>
   >();
   let shouldRecordLastEvent = true;
+  try {
+    (async () => {
+      let lastEventValue: StreamEvent | null = null;
+      const callbacks: RunUICallbacks = {};
 
-  (async () => {
-    let lastEventValue: StreamEvent | null = null;
-    const callbacks: RunUICallbacks = {};
+      for await (const streamEvent of (
+        runnable as Runnable<RunInput, RunOutput>
+      ).streamEvents(inputs, {
+        version: "v1",
+      })) {
+        for await (const handler of options.eventHandlers) {
+          await handler(streamEvent, {
+            ui,
+            callbacks,
+          });
+        }
+        if (shouldRecordLastEvent) {
+          lastEventValue = streamEvent;
+        }
+        if (
+          streamEvent.data.chunk?.name === "LangGraph" &&
+          streamEvent.data.chunk?.event === "on_chain_end"
+        ) {
+          shouldRecordLastEvent = false;
+        }
+      }
 
-    for await (const streamEvent of (
-      runnable as Runnable<RunInput, RunOutput>
-    ).streamEvents(inputs, {
-      version: "v1",
-    })) {
-      for await (const handler of options.eventHandlers) {
-        await handler(streamEvent, {
-          ui,
-          callbacks,
-        });
-      }
-      if (shouldRecordLastEvent) {
-        lastEventValue = streamEvent;
-      }
-      if (
-        streamEvent.data.chunk?.name === "LangGraph" &&
-        streamEvent.data.chunk?.event === "on_chain_end"
-      ) {
-        shouldRecordLastEvent = false;
-      }
-    }
-
-    // resolve the promise, which will be sent
-    // to the client thanks to RSC
-    const resolveValue =
-      lastEventValue?.data.output || lastEventValue?.data.chunk?.data?.output;
-    resolve(resolveValue);
-    Object.values(callbacks).forEach((cb) => cb.done());
+      // resolve the promise, which will be sent
+      // to the client thanks to RSC
+      const resolveValue =
+        lastEventValue?.data.output || lastEventValue?.data.chunk?.data?.output;
+      resolve(resolveValue);
+      Object.values(callbacks).forEach((cb) => cb.done());
+      ui.done();
+    })();
+  } catch (error) {
+    console.error("taking time to get done", error);
     ui.done();
-  })();
+  }
 
   return { ui: ui.value, lastEvent };
 }
@@ -108,7 +112,7 @@ export function withResolvers<T>() {
  * @param actions
  */
 export function exposeEndpoints<T extends Record<string, unknown>>(
-  actions: T,
+  actions: T
 ): {
   (props: { children: ReactNode }): Promise<JSX.Element>;
   $$types?: T;

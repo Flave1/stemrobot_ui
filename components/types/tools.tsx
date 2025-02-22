@@ -52,3 +52,7 @@ export type LineItem = {
     rates: Record<string, number>;
     marketType: string;
   }
+
+  export interface InternetSearchProps {
+    result: string[];
+  }

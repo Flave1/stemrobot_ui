@@ -27,22 +27,59 @@ function MarketTicker() {
     }, []);
   
     return (
-      <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-80 p-2 overflow-hidden">
-        <div className="flex animate-ticker">
-          {tickerData.map((item, index) => (
-            <div key={index} className="flex items-center mr-8">
-              <span className="font-bold mr-2">{item.symbol}</span>
-              <span className="mr-2">${item.price.toFixed(2)}</span>
-              <span
-                className={item.change >= 0 ? "text-green-500" : "text-red-500"}
-              >
-                {item.change >= 0 ? "▲" : "▼"} {Math.abs(item.change).toFixed(2)}%
-              </span>
-            </div>
-          ))}
+      <div className="h-12 bg-black/80 backdrop-blur-sm border-t border-gray-800">
+        <div className="max-w-full mx-auto h-full flex items-center overflow-hidden">
+          {/* First ticker instance */}
+          <div className="flex animate-ticker whitespace-nowrap">
+            {tickerData.map((item, index) => (
+              <div key={index} className="flex items-center mx-4 h-12 shrink-0">
+                <span className="font-semibold text-gray-200 mr-2">{item.symbol}</span>
+                <span className="text-gray-400 mr-2">${item.price.toFixed(2)}</span>
+                <span
+                  className={`${
+                    item.change >= 0 ? "text-green-500" : "text-red-500"
+                  } tabular-nums`}
+                >
+                  {item.change >= 0 ? "▲" : "▼"} {Math.abs(item.change).toFixed(2)}%
+                </span>
+              </div>
+            ))}
+          </div>
+          
+          {/* Duplicate ticker for seamless loop */}
+          <div className="flex animate-ticker whitespace-nowrap">
+            {tickerData.map((item, index) => (
+              <div key={`dup-${index}`} className="flex items-center mx-4 h-12 shrink-0">
+                <span className="font-semibold text-gray-200 mr-2">{item.symbol}</span>
+                <span className="text-gray-400 mr-2">${item.price.toFixed(2)}</span>
+                <span
+                  className={`${
+                    item.change >= 0 ? "text-green-500" : "text-red-500"
+                  } tabular-nums`}
+                >
+                  {item.change >= 0 ? "▲" : "▼"} {Math.abs(item.change).toFixed(2)}%
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
+
+        <style jsx>{`
+          .animate-ticker {
+            animation: ticker 25s linear infinite;
+          }
+          
+          @keyframes ticker {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+        `}</style>
       </div>
     );
   }
 
-  export default MarketTicker
+export default MarketTicker;
