@@ -40,12 +40,12 @@ const Header = () => {
 
   const NavLinks = () => (
     <>
-      <li>
+      {/* <li>
         <Link href="/" className="hover:text-gray-300 flex items-center">
           <HomeIcon className="mr-2" />
           Home
         </Link>
-      </li>
+      </li> */}
       <li>
         <Link href="/pricing" className="hover:text-gray-300 flex items-center">
           <DollarSign className="mr-2" />
@@ -64,7 +64,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center">
+        <Link href="/" className="flex items-center">
           <div className="w-16 h-16 md:w-20 md:h-20">
             <Canvas camera={{ position: [0, 0, 5] }}>
               <ambientLight intensity={0.5} />
@@ -73,7 +73,7 @@ const Header = () => {
             </Canvas>
           </div>
           <span className="text-xl md:text-2xl font-bold ml-2">Stembots</span>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6">

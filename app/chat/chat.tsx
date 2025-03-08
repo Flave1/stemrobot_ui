@@ -62,73 +62,52 @@ export default function Chat({
   const [history, setHistory] = useState<[role: string, content: string][]>([]);
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { user, logout } = useAuth();
 
   async function onSubmit(input: string) {
+    if (!input.trim()) return;
+
     const newElements = [...elements];
     let base64File: string | undefined = undefined;
     const fileExtension = selectedFile?.type.split("/")[1];
+    
     if (selectedFile) {
       base64File = await convertFileToBase64(selectedFile);
     }
-    const element = await actions.agent({
-      input,
-      chat_history: history,
-      file:
-        base64File && fileExtension
+
+    try {
+      const element = await actions.agent({
+        input,
+        chat_history: history,
+        file: base64File && fileExtension
           ? {
               base64: base64File,
               extension: fileExtension,
             }
           : undefined,
-    });
+      });
 
-    newElements.push(
-      <div className="flex flex-col w-full gap-1 mt-auto" key={history.length} >
-        {selectedFile && <FileUploadMessage file={selectedFile} />}
-        <HumanMessageText content={input} />
-        <div className="flex flex-col gap-1 w-full max-w-fit mr-auto" >
-          {element.ui}
+      newElements.push(
+        <div className="flex flex-col w-full gap-1 mt-auto" key={history.length}>
+          {selectedFile && <FileUploadMessage file={selectedFile} />}
+          <HumanMessageText content={input} />
+          <div className="flex flex-col gap-1 w-full max-w-fit mr-auto">
+            {element.ui}
+          </div>
         </div>
-      </div>
-    );
+      );
 
-    // consume the value stream to obtain the final string value
-    // after which we can append to our chat history state
-    (async () => {
-      const lastEvent = await element.lastEvent;
-      if (Array.isArray(lastEvent)) {
-        if (lastEvent[0].invoke_model && lastEvent[0].invoke_model.result) {
-          setHistory((prev) => [
-            ...prev,
-            ["human", input],
-            ["ai", lastEvent[0].invoke_model.result],
-          ]);
-        } else if (lastEvent[1].invoke_tools) {
-          setHistory((prev) => [
-            ...prev,
-            ["human", input],
-            [
-              "ai",
-              `Tool result: ${JSON.stringify(lastEvent[1].invoke_tools.tool_result, null)}`,
-            ],
-          ]);
-        } else {
-          setHistory((prev) => [...prev, ["human", input]]);
-        }
-      } else if (lastEvent.invoke_model && lastEvent.invoke_model.result) {
-        setHistory((prev) => [
-          ...prev,
-          ["human", input],
-          ["ai", lastEvent.invoke_model.result],
-        ]);
-      }
-    })();
+      setElements(newElements);
+      setInput("");
+      setSelectedFile(undefined);
 
-    setElements(newElements);
-    setInput("");
-    setSelectedFile(undefined);
+      // Update history after successful response
+      setHistory(prev => [...prev, ["human", input]]);
+    } catch (error) {
+      console.error("Error in chat submission:", error);
+      // Handle error appropriately
+    }
   }
 
   const handleKeyDown = async (e: any) => {

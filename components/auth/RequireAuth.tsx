@@ -1,17 +1,17 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
-
+  const pathname = usePathname();
   useEffect(() => {
     if (!loading && !user) {
       // Store the intended destination
-      sessionStorage.setItem('redirectAfterLogin', '/chat');
+      sessionStorage.setItem('redirectAfterLogin', pathname);
       router.push('/auth/signin');
     }
   }, [user, loading, router]);

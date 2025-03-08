@@ -4,70 +4,37 @@ import "server-only";
 import { StreamEvent } from "@langchain/core/tracers/log_stream";
 import { EventHandlerFields } from "@/utils/server";
 import { Github, GithubLoading } from "@/components/prebuilt/github";
-import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { AIMessage } from "@/ai/message";
-import {
-  CurrencyRatesLoading,
-  CurrencyRates,
-} from "@/components/prebuilt/currencies";
 import { InvoiceLoading, Invoice } from "@/components/prebuilt/invoice";
 import {
   CurrentWeatherLoading,
   CurrentWeather,
 } from "@/components/prebuilt/weather";
-import { InternetSearch, InternetSearchLoading } from "@/components/prebuilt/search";
-import { ComponentProps } from "react";
+import { createStreamableUI, createStreamableValue } from "ai/rsc";
+import { AIMessage } from "@/ai/message";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/chat";
+const API_URL = "http://localhost:8000/chat";
 
 type ToolComponent = {
-  loading: () => JSX.Element;
-  final: (props: any) => JSX.Element;
+  loading: (props?: any) => JSX.Element;
+  final: (props?: any) => JSX.Element;
 };
 
 type ToolComponentMap = {
-  "github-repo": {
-    loading: () => JSX.Element;
-    final: (props: ComponentProps<typeof Github>) => JSX.Element;
-  };
-  "invoice-parser": {
-    loading: () => JSX.Element;
-    final: (props: ComponentProps<typeof Invoice>) => JSX.Element;
-  };
-  "weather-data": {
-    loading: () => JSX.Element;
-    final: (props: ComponentProps<typeof CurrentWeather>) => JSX.Element;
-  };
-  "get-available-currencies": {
-    loading: () => JSX.Element;
-    final: (props: ComponentProps<typeof CurrencyRates>) => JSX.Element;
-  };
-  "search-tavily": {
-    loading: () => JSX.Element;
-    final: (props: ComponentProps<typeof InternetSearch>) => JSX.Element;
-  };
+  [tool: string]: ToolComponent;
 };
 
 const TOOL_COMPONENT_MAP: ToolComponentMap = {
   "github-repo": {
-    loading: () => <GithubLoading />,
-    final: (props) => <Github {...props} />
+    loading: (props?: any) => <GithubLoading {...props} />,
+    final: (props?: any) => <Github {...props} />,
   },
   "invoice-parser": {
-    loading: () => <InvoiceLoading />,
-    final: (props) => <Invoice {...props} />,
+    loading: (props?: any) => <InvoiceLoading {...props} />,
+    final: (props?: any) => <Invoice {...props} />,
   },
   "weather-data": {
-    loading: () => <CurrentWeatherLoading />,
-    final: (props) => <CurrentWeather {...props} />,
-  },
-  "get-available-currencies": {
-    loading: () => <CurrencyRatesLoading />,
-    final: (props) => <CurrencyRates {...props} />,
-  },
-  "search-tavily": {
-    loading: () => <InternetSearchLoading />,
-    final: (props) => <InternetSearch {...props} />,
+    loading: (props?: any) => <CurrentWeatherLoading {...props} />,
+    final: (props?: any) => <CurrentWeather {...props} />,
   },
 };
 
@@ -96,11 +63,9 @@ async function agent(inputs: {
    */
   const handleInvokeModelEvent = (
     event: StreamEvent,
-    fields: EventHandlerFields
+    fields: EventHandlerFields,
   ) => {
     const [type] = event.event.split("_").slice(2);
-
-    console.log("event", event.data)
     if (
       type !== "end" ||
       !event.data.output ||
@@ -115,31 +80,8 @@ async function agent(inputs: {
       event.data.output.tool_calls.length > 0
     ) {
       const toolCall = event.data.output.tool_calls[0];
-
-      if (!(toolCall.type in TOOL_COMPONENT_MAP)) {
-        console.error(
-          `Invalid tool type: ${toolCall.type}. Please check your implementation or input.`
-        );
-        return;
-      }
-
       if (!selectedToolComponent && !selectedToolUI) {
-        selectedToolComponent = TOOL_COMPONENT_MAP[toolCall.type as keyof ToolComponentMap];
-
-        if (!selectedToolComponent) {
-          console.error(
-            `No component found for tool type: ${toolCall.type}. Please ensure TOOL_COMPONENT_MAP includes an entry for this type.`
-          );
-          return;
-        }
-
-        if (!selectedToolComponent.loading) {
-          console.error(
-            `No 'loading' method defined for tool type: ${toolCall.type}`
-          );
-          return;
-        }
-        console.log("selectedToolComponent", selectedToolComponent);
+        selectedToolComponent = TOOL_COMPONENT_MAP[toolCall.type];
         selectedToolUI = createStreamableUI(selectedToolComponent.loading());
         fields.ui.append(selectedToolUI?.value);
       }
@@ -165,7 +107,6 @@ async function agent(inputs: {
 
     if (selectedToolUI && selectedToolComponent) {
       const toolData = event.data.output.tool_result;
-      console.log("toolData", toolData);
       selectedToolUI.done(selectedToolComponent.final(toolData));
     }
   };
@@ -180,7 +121,7 @@ async function agent(inputs: {
    */
   const handleChatModelStreamEvent = (
     event: StreamEvent,
-    fields: EventHandlerFields
+    fields: EventHandlerFields,
   ) => {
     if (
       event.event !== "on_chat_model_stream" ||
@@ -219,7 +160,7 @@ async function agent(inputs: {
         handleInvokeToolsEvent,
         handleChatModelStreamEvent,
       ],
-    }
+    },
   );
 }
 

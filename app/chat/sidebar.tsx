@@ -2,13 +2,14 @@
 
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { X } from "lucide-react"
+import { X, Plus, LogOut } from "lucide-react"
 import type { Message } from "ai"
 import type React from "react" // Added import for React
-import { ExitIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { MessageSquare, Settings } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 interface SidebarProps {
   open: boolean
@@ -19,82 +20,122 @@ interface SidebarProps {
 export function Sidebar({ open, setOpen, messages }: SidebarProps) {
   const tempmessages: Message = {
     content: "History not available",
-    role: "system",
-    id: "id"
+    id: "1",
+    role: "assistant"
   }
-  if(messages.length == 0){
-    messages.push(tempmessages)
+  
+  const router = useRouter();
+  
+  // Force sidebar open on initial render
+  useEffect(() => {
+    setOpen(true);
+  }, [setOpen]);
+  
+  const handleNewChat = () => {
+    // Clear current chat and start a new one
+    // You might want to add logic to save the current chat before clearing
+    router.push('/chat');
+    setOpen(false);
   }
+  
+  const handleExit = () => {
+    // Navigate to the landing page or home
+    router.push('/');
+  }
+
   return (
-    <>
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-black/80 backdrop-blur-sm transition-all duration-300",
-          open ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-        onClick={() => setOpen(false)}
-      />
-      <div
-        className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-gray-900/90 backdrop-blur-sm border-r border-gray-800 transition-transform duration-300 transform",
-          open ? "translate-x-0" : "-translate-x-full"
-        )}
-      >
-        <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between p-4 border-b border-gray-800">
-            <h2 className="text-lg font-semibold text-white">Chat History</h2>
-            <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+    <div
+      className={cn(
+        "bg-black/90 backdrop-blur-sm fixed inset-y-0 left-0 z-50 w-full sm:w-[300px] border-r border-gray-800 transition-transform duration-300 ease-in-out",
+        open ? "translate-x-0" : "-translate-x-full"
+      )}
+    >
+      <div className="flex h-full flex-col">
+        <div className="flex items-center justify-between px-4 h-14 border-b border-gray-800">
+          <div className="flex items-center">
+            <MessageSquare className="h-5 w-5 text-gray-400 mr-2" />
+            <span className="text-lg font-semibold text-white">Chat History</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-gray-400 hover:text-white"
+              onClick={() => setOpen(false)}
+            >
               <X className="h-5 w-5" />
+              <span className="sr-only">Close</span>
             </Button>
           </div>
-          
-          <div className="flex-1 overflow-y-auto p-4">
-            <div className="space-y-2">
-              {messages.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-4">
-                  No chat history yet
-                </p>
-              ) : (
-                messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className="p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800/70 transition-colors cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <MessageSquare className="h-4 w-4 text-blue-400" />
-                      <span className="text-sm font-medium text-gray-200">
-                        Chat {index + 1}
+        </div>
+        
+        {/* New Chat Button */}
+        <Button
+          variant="ghost"
+          className="flex items-center justify-start px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-none border-b border-gray-800"
+          onClick={handleNewChat}
+        >
+          <Plus className="h-5 w-5 mr-2" />
+          <span>New Chat</span>
+        </Button>
+        
+        <ScrollArea className="flex-1 px-4 py-2">
+          <div className="space-y-2">
+            {messages.length > 0
+              ? messages
+                  .filter(message => message.role === "user")
+                  .map(message => (
+                    <Button
+                      key={message.id}
+                      variant="ghost"
+                      className="w-full justify-start text-gray-400 hover:text-white"
+                    >
+                      <MessageSquare className="h-4 w-4 mr-2" />
+                      <span className="truncate">
+                        {message.content.substring(0, 30)}
+                        {message.content.length > 30 ? "..." : ""}
                       </span>
-                    </div>
-                    <p className="text-xs text-gray-400 truncate">
-                      {message.content}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          <div className="p-4 border-t border-gray-800">
-            <div className="space-y-3">
-              <Link href="/settings" className="block">
+                    </Button>
+                  ))
+              : (
                 <Button
-                  variant="outline"
-                  className="w-full justify-start gap-2 bg-transparent border-gray-700 text-gray-300 hover:bg-gray-800/50"
+                  variant="ghost"
+                  className="w-full justify-start text-gray-400 hover:text-white"
                 >
-                  <Settings className="h-4 w-4" />
-                  Settings
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  <span className="truncate">
+                    {tempmessages.content}
+                  </span>
                 </Button>
-              </Link>
-              <div className="text-xs text-gray-400 text-center">
-                <p>Stembots Trading Assistant</p>
-                <p className="mt-1">Version 1.0.0</p>
-              </div>
-            </div>
+              )}
           </div>
+        </ScrollArea>
+        
+        <div className="border-t border-gray-800 p-4 space-y-2">
+          {/* Settings Button */}
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-400 hover:text-white"
+            asChild
+          >
+            <Link href="/settings">
+              <Settings className="h-5 w-5 mr-2" />
+              <span>Settings</span>
+            </Link>
+          </Button>
+          
+          {/* Exit Button */}
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-gray-400 hover:text-white"
+            onClick={handleExit}
+          >
+            <LogOut className="h-5 w-5 mr-2" />
+            <span>Exit</span>
+          </Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

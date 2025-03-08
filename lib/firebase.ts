@@ -4,17 +4,16 @@ import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBs4dCib1arNNMRprx141lnvx22k7QVJwg",
-  authDomain: "tradeauth-b5e2e.firebaseapp.com",
-  projectId: "tradeauth-b5e2e",
-  storageBucket: "tradeauth-b5e2e.firebasestorage.app",
-  messagingSenderId: "995388905989",
-  appId: "1:995388905989:web:81fbf78bff1f41d4511a6c",
-  measurementId: "G-414E3P3FGF"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-// Initialize Firebase only if it hasn't been initialized already
+// Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
 
-export { auth }; 
+export { app, auth }; 
