@@ -72,6 +72,7 @@ export interface Message {
   content: string;
   id?: string;
   tool_calls?: ToolCall[];
+  additional_kwargs: any
 }
 
 export type ToolCall = { name: string, args: object, id: string };
