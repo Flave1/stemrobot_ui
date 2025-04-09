@@ -2,42 +2,45 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { ArrowUp, ArrowDown } from "lucide-react";
-
-interface CurrencyData {
-  code: string;
-  value: number;
-}
-
-interface CurrencyResponse {
-  meta: {
-    last_updated_at: string;
-  };
-  data: {
-    [key: string]: CurrencyData;
-  };
-}
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowUp, ArrowDown, Loader2 } from "lucide-react";
+import { AgentState, CurrencyResponse } from "../agent-types";
 
 interface CurrencyChartProps {
-  data: string;
-  currencyPair: string;
+  nodeState: Partial<AgentState>;
 }
 
-export function CurrencyChart({ data, currencyPair }: CurrencyChartProps) {
+export function CurrencyNode({ nodeState }: CurrencyChartProps) {
+
+  const response = nodeState.currency_result?.[0]
   const [currencyData, setCurrencyData] = useState<CurrencyResponse | null>(
     null
   );
-  const [lastUpdate, setLastUpdate] = useState<string>("");
+  // const [lastUpdate, setLastUpdate] = useState<string>("");
   useEffect(() => {
     try {
-      const parsedData = JSON.parse(data);
-      console.log("parsedData", parsedData);
-      setLastUpdate(new Date(parsedData.meta.last_updated_at).toLocaleString());
+      console.log("response", response);
+      // setLastUpdate(response?.result.data?.last_updated_at || "");
+      setCurrencyData(response?.result || null)
     } catch (error) {
       console.error("Error parsing currency data:", error);
     }
-  }, [data]);
+  }, [response]);
+
+  if (nodeState?.currency_result?.[0]?.search_status) {
+    return (
+      <div className="flex justify-end">
+        <Card className="inline-block">
+          <CardContent className="p-2">
+            <div className="flex items-center gap-2">
+              <Loader2 className="w-6 h-6 animate-spin" />
+              <div className="text-sm">{nodeState?.currency_result?.[0]?.search_status}</div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   if (!currencyData) return null;
 
@@ -52,7 +55,7 @@ export function CurrencyChart({ data, currencyPair }: CurrencyChartProps) {
         <div>
           <h3 className="text-lg font-semibold">Forex Rates</h3>
           <p className="text-sm text-muted-foreground">
-            Last updated: {lastUpdate}
+            Last updated: {nodeState.currency_result?.[0].result.meta.last_updated_at}
           </p>
         </div>
       </div>

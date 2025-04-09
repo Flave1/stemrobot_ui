@@ -1,15 +1,32 @@
 import { AgentState } from '../agent-types';
-import { Bot, User } from 'lucide-react';
+import { Bot, Loader2, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@mui/material';
 
 interface ChatbotNodeProps {
   nodeState: Partial<AgentState>;
 }
 
 export function ChatbotNode({ nodeState }: ChatbotNodeProps) {
+
+  if (nodeState?.trade_update?.[0]?.status) {
+    return (
+      <div className="flex justify-end">
+        <Card className="inline-block">
+          <CardContent className="p-2">
+            <div className="flex items-center gap-2">
+              <Loader2 className="w-6 h-6 animate-spin" />
+              <div className="text-sm">{nodeState?.trade_update?.[0]?.status}</div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   const getMessageStyles = (type: string) => {
     const isUser = type === 'user' || type === 'human';
     

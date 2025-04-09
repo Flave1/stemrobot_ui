@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import WeatherNode from './components/weather/weather-node';
 import Reminder from './components/reminder';
 import { NodeCard } from './components/node-card';
-import { CurrencyChart } from './components/currency-chart';
+import { CurrencyNode } from './components/currency-node';
 
 export default function ChatPage() {
   const params = useParams<{ id: string, message: string }>();
@@ -147,15 +147,7 @@ export default function ChatPage() {
       case 'reminder':
         return <Reminder interruptValue={checkpoint.interruptValue as string} onResume={handleResume} />;
       case 'search_currency_price':
-        // Extract currency pair and data from the node state
-        const currencyData = node.state?.messages?.[0]?.content;
-        const currencyPair = node.state?.messages?.[0]?.additional_kwargs?.currencyPair || 'USD/EUR';
-        return currencyData ? (
-          <CurrencyChart 
-            data={currencyData} 
-            currencyPair={currencyPair}
-          />
-        ) : null;
+      return <CurrencyNode nodeState={node.state} />;
       default:
         return null;
     }

@@ -35,8 +35,8 @@ export default function RootLayout({
     <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
-        enableSystem
+        defaultTheme="dark"
+        enableSystem={false}
         disableTransitionOnChange
       >
         <SidebarProvider>
