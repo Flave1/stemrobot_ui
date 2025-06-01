@@ -146,6 +146,8 @@ export default function ChatPage() {
         return <WeatherNode nodeState={node.state} />;
       case 'reminder':
         return <Reminder interruptValue={checkpoint.interruptValue as string} onResume={handleResume} />;
+      case 'placetrade':
+        return <Reminder interruptValue={checkpoint.interruptValue as string} onResume={handleResume} />;
       case 'search_currency_price':
       return <CurrencyNode nodeState={node.state} />;
       default:

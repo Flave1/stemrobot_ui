@@ -26,7 +26,7 @@ export default function Reminder({ interruptValue, onResume }: ReminderProps) {
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1 p-4">
           <CardTitle className="text-xl">{interruptValue}</CardTitle>
-          <p className="text-sm text-muted-foreground">Are u sure you want to create a reminder?</p>
+          <p className="text-sm text-muted-foreground">Are you sure you want to execute trade?</p>
         </CardHeader>
         <CardFooter className="flex items-center gap-2 p-4 pt-0">
           {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}

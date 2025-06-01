@@ -3,8 +3,8 @@ import { Bot, Loader2, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@mui/material';
+import { Badge } from '@/components/ui/badge';
 
 interface ChatbotNodeProps {
   nodeState: Partial<AgentState>;
@@ -97,7 +97,7 @@ export function ChatbotNode({ nodeState }: ChatbotNodeProps) {
                   {msg.content}
                 </ReactMarkdown>
               </div>
-              {msg.tool_calls && msg.tool_calls.length > 0 && (
+              {/* {msg.tool_calls && msg.tool_calls.length > 0 && (
                 <div className="flex items-center gap-2 mt-2 text-xs">
                   <span className="opacity-70">Tools used:</span>
                   <div className="flex flex-wrap gap-1">
@@ -112,7 +112,7 @@ export function ChatbotNode({ nodeState }: ChatbotNodeProps) {
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         );
